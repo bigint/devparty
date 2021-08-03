@@ -1,32 +1,44 @@
 import { ValidationError } from '@graphql/errors'
-import SecurePassword from 'secure-password'
+import crypto from 'crypto'
+import { bcrypt, bcryptVerify } from 'hash-wasm/lib/bcrypt'
 import { db } from './prisma'
 
-const securePassword = new SecurePassword()
+/**
+ * This is the cost factor of the bcrypt hash function. In general, this number
+ * should be changed as CPUs get faster.
+ */
+const COST_FACTOR = 11
+
+// A regex that can be used to determine the work factor of a hashed password:
+const BCRYPT_WORK_FACTOR_REGEX = /^\$2[ab]\$(\d+)\$/
 
 /**
  * Hash a plain text password and return the hashed password.
  */
-export async function hashPassword(password: string) {
-  return await securePassword.hash(Buffer.from(password))
+export async function hashPassword(password: string): Promise<string> {
+  const salt = crypto.randomBytes(16)
+
+  const key = await bcrypt({
+    password,
+    salt,
+    costFactor: COST_FACTOR,
+    outputType: 'encoded'
+  })
+
+  return key
 }
 
 /**
  * Verify that a hashed password and a plain text password match.
  */
-export async function verifyPassword(hashedPassword: Buffer, password: string) {
-  try {
-    return await securePassword.verify(Buffer.from(password), hashedPassword)
-  } catch (error) {
-    console.error(error)
-    return SecurePassword.INVALID
-  }
-}
-
-export function passwordIsValid(validity: symbol) {
-  return [SecurePassword.VALID, SecurePassword.VALID_NEEDS_REHASH].includes(
-    validity
-  )
+export function verifyPassword(
+  hashedPassword: string,
+  password: string
+): Promise<boolean> {
+  return bcryptVerify({
+    password,
+    hash: hashedPassword
+  })
 }
 
 /**
@@ -48,24 +60,29 @@ export async function authenticateUser(email: string, password: string) {
     })
   }
 
-  const passwordStatus = await verifyPassword(user.hashedPassword, password)
+  // If the password is invalid, reject the authenticate request:
+  if (!(await verifyPassword(user.hashedPassword, password))) {
+    throw new ValidationError('Invalid password.', {
+      password: 'Password is incorrect.'
+    })
+  }
 
-  switch (passwordStatus) {
-    case SecurePassword.VALID:
-      break
-    case SecurePassword.VALID_NEEDS_REHASH:
-      // If the password was hashed with a less-secure hash, we will seamlessly
-      // upgrade it to the more secure version.
-      const improvedHash = await hashPassword(password)
-      await db.user.update({
-        where: { id: user.id },
-        data: { hashedPassword: improvedHash }
-      })
-      break
-    default:
-      throw new ValidationError('Invalid password.', {
-        password: 'Password is incorrect.'
-      })
+  const decodedHash = user.hashedPassword.match(BCRYPT_WORK_FACTOR_REGEX)
+
+  // NOTE: This never practically should happen, but we want to error out in the event that it does:
+  if (!decodedHash) {
+    throw new Error('Unknown password format.')
+  }
+
+  // If the password was hashed with a work factor that is not the same as the current work factor,
+  // we will seamlessly upgrade it to the updated work factor:
+  const passwordWorkFactor = parseInt(decodedHash[1], 10)
+  if (passwordWorkFactor !== COST_FACTOR) {
+    const improvedHash = await hashPassword(password)
+    await db.user.update({
+      where: { id: user.id },
+      data: { hashedPassword: improvedHash }
+    })
   }
 
   return user
