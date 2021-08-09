@@ -26,7 +26,7 @@
     "@giraphql/plugin-prisma": "^0.4.0",
     "@giraphql/plugin-relay": "^2.13.2",
     "@giraphql/plugin-scope-auth": "2.8.2",
-    "@giraphql/plugin-simple-objects": "2.6.2",
+    "@giraphql/plugin-simple-objects": "2.7.0",
     "@giraphql/plugin-validation": "2.8.2",
     "@headlessui/react": "^1.4.0",
     "@heroicons/react": "^1.0.3",
