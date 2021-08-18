@@ -1,11 +1,13 @@
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  planetScaleMode   = true
 }
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["orderByRelation", "selectRelationCount", "nApi", "referentialActions", "orderByAggregateGroup", "filterJson"]
+  previewFeatures = ["orderByRelation", "selectRelationCount", "nApi", "referentialActions", "orderByAggregateGroup", "filterJson", "planetScaleMode"]
 }
 
 model User {
@@ -46,7 +48,7 @@ model Session {
   expiresAt DateTime @default(now())
 
   // Relations
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id])
   userId String
 }
 
@@ -63,7 +65,7 @@ model Profile {
   twitter  String?
 
   // Relations
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id])
   userId String
 
   // Attributes
@@ -83,9 +85,9 @@ model Post {
   updatedAt DateTime @updatedAt
 
   // Relations
-  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User         @relation(fields: [userId], references: [id])
   userId    String
-  product   Product?     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product   Product?     @relation(fields: [productId], references: [id])
   productId String?
   likes     Like[]
   replies   Reply[]
@@ -105,9 +107,9 @@ model PostTopics {
   id String @id @default(uuid())
 
   // Relations
-  post    Post?   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post    Post?   @relation(fields: [postId], references: [id])
   postId  String?
-  topic   Topic?  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  topic   Topic?  @relation(fields: [topicId], references: [id])
   topicId String?
 
   // Attributes
@@ -138,9 +140,9 @@ model Reply {
 
   // Relations
   likes  Like[]
-  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post   Post   @relation(fields: [postId], references: [id])
   postId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id])
   userId String
 }
 
@@ -152,11 +154,11 @@ model Like {
   updatedAt DateTime @updatedAt
 
   // Relations
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id])
   userId  String
-  post    Post?   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post    Post?   @relation(fields: [postId], references: [id])
   postId  String?
-  reply   Reply?  @relation(fields: [replyId], references: [id], onDelete: Cascade)
+  reply   Reply?  @relation(fields: [replyId], references: [id])
   replyId String?
 
   // Attributes
@@ -182,7 +184,7 @@ model Product {
   updatedAt DateTime @updatedAt
 
   // Relations
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User?   @relation(fields: [userId], references: [id])
   userId String?
   posts  Post[]
 }
