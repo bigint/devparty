@@ -121,7 +121,11 @@ const Navbar: React.FC = () => {
                 ) : (
                   <div className="space-x-4">
                     <Link href="/signup" passHref>
-                      <Button size="lg" variant="primary">
+                      <Button
+                        className="hidden md:inline-block"
+                        size="lg"
+                        variant="primary"
+                      >
                         Signup
                       </Button>
                     </Link>
