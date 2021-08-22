@@ -19,38 +19,39 @@ const Footer: React.FC = () => {
       <span className="text-gray-500 dark:text-gray-300 font-bold pr-3">
         © Devparty
       </span>
-      <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2">
-        <span>
-          <Link href="/">About</Link>
-        </span>
-        <span>
-          <Link href="/">Terms</Link>
-        </span>
-        <span>
-          <Link href="/">Privacy</Link>
-        </span>
-        <a
-          href="https://gitlab.com/yo/devparty"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Status
-        </a>
-        <a
-          href="https://kinopio.club/-devparty-roadmap-SxWTMtzJ6jhQwTszij6-h"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Roadmap
-        </a>
-        <a
-          href="https://gitlab.com/yo/devparty"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitLab
-        </a>
-      </div>
+      <span className="pr-3">
+        <Link href="/">About</Link>
+      </span>
+      <span className="pr-3">
+        <Link href="/">Terms</Link>
+      </span>
+      <span className="pr-3">
+        <Link href="/">Privacy</Link>
+      </span>
+      <a
+        className="pr-3"
+        href="https://gitlab.com/yo/devparty"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Status
+      </a>
+      <a
+        className="pr-3"
+        href="https://kinopio.club/-devparty-roadmap-SxWTMtzJ6jhQwTszij6-h"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Roadmap
+      </a>
+      <a
+        className="pr-3"
+        href="https://gitlab.com/yo/devparty"
+        target="_blank"
+        rel="noreferrer"
+      >
+        GitLab
+      </a>
       <div className="flex mt-1">
         <a
           className="pr-3 hover:font-bold"

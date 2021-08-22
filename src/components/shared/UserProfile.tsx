@@ -4,9 +4,9 @@ import React, { useContext } from 'react'
 import { User } from '~/__generated__/schema.generated'
 import AppContext from '~/components/utils/AppContext'
 
-import FlyoutPopover from '../ui/FlyoutPopover'
 import Follow from '../User/Follow'
 import Slug from './Slug'
+import UserPopover from './UserPopover'
 
 interface Props {
   user: User
@@ -27,14 +27,14 @@ const UserProfile: React.FC<Props> = ({ user, showFollow = false }) => {
         <div>
           <div className="flex items-center gap-1.5">
             <div className="inline-flex">
-              <FlyoutPopover user={user}>
+              <UserPopover user={user}>
                 <span>{user?.profile?.name}</span>
                 {user?.isVerified && (
                   <span title="Verified">
                     <BadgeCheckIcon className="h-4 w-4 text-indigo-500" />
                   </span>
                 )}
-              </FlyoutPopover>
+              </UserPopover>
             </div>
           </div>
           <Slug slug={user?.username} prefix="@" />

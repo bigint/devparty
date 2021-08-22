@@ -4,7 +4,7 @@ import React, { Fragment, ReactNode, useRef, useState } from 'react'
 
 import { User } from '~/__generated__/schema.generated'
 
-export default function FlyoutPopover({
+export default function UserPopover({
   children,
   user
 }: {
@@ -34,20 +34,6 @@ export default function FlyoutPopover({
       timeout = setTimeout(() => toggleMenu(false), closeTimeoutDuration)
     }
   }
-
-  // const handleClickOutside = (event: any) => {
-  //   if (buttonRef.current && !buttonRef.current.contains(event.target)) {
-  //     event.stopPropagation()
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   document.addEventListener('mousedown', handleClickOutside)
-
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside)
-  //   }
-  // })
 
   return (
     <Popover className="mx-auto w-48 relative">
@@ -80,9 +66,9 @@ export default function FlyoutPopover({
               static
               className="absolute top-6 z-10 md:w-56 w-48 mx-auto"
             >
-              <div className="p-5 bg-gray-100 dark:bg-black border rounded-2xl">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                text ever since the 1500s, when an unknown printer took a galley
+              <div className="p-5 bg-gray-100 dark:bg-black border border-gray-100 dark:border-gray-900 rounded-lg">
+                <h6 className="font-bold mb-2">{user?.profile?.name}</h6>
+                <p>{user?.profile?.bio}</p>
               </div>
             </Popover.Panel>
           </Transition>
