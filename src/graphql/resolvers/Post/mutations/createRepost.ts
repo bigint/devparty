@@ -1,11 +1,11 @@
 import { Session } from '@prisma/client'
 
-import { CreatePostInput } from '~/__generated__/schema.generated'
+import { CreateRepostInput } from '~/__generated__/schema.generated'
 import { db } from '~/utils/prisma'
 
 export const createRepost = async (
   query: any,
-  input: CreatePostInput,
+  input: CreateRepostInput,
   session: Session | null | undefined
 ) => {
   let parentId = null
