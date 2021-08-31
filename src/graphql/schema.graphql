@@ -21,6 +21,10 @@ input CreateProductInput {
   slug: String!
 }
 
+input CreateRepostInput {
+  parentId: ID
+}
+
 scalar DateTime
 
 input DeletePostInput {
@@ -86,6 +90,7 @@ type Mutation {
   changePassword(input: ChangePasswordInput!): Result!
   createPost(input: CreatePostInput!): Post!
   createProduct(input: CreateProductInput!): Product!
+  createRepost(input: CreateRepostInput!): Post!
   deletePost(input: DeletePostInput!): Post!
   editPost(input: EditPostInput!): Post!
   editProduct(input: EditProductInput!): Product!

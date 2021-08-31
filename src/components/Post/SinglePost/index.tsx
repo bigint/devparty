@@ -21,6 +21,7 @@ import {
 import SelectedProduct from './SelectedProduct'
 import PostType from './Type/Post'
 import QuestionType from './Type/Question'
+import RepostType from './Type/Repost'
 import TaskType from './Type/Task'
 
 export const PostFragment = gql`
@@ -34,9 +35,23 @@ export const PostFragment = gql`
     hasLiked
     parent {
       id
+      title
+      body
+      done
+      attachments
+      type
+      hasLiked
       user {
         id
         username
+        hasFollowed
+        isVerified
+        profile {
+          id
+          name
+          avatar
+          bio
+        }
       }
     }
     replies {
@@ -126,7 +141,7 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
   return (
     <Card>
       <CardBody className="space-y-4">
-        {post?.parent && showParent && (
+        {post?.parent && post?.type === 'REPLY' && showParent && (
           <div className="text-sm flex space-x-1">
             <Link href={`/posts/${post?.parent?.id}`} passHref>
               <a className="text-gray-500 dark:text-gray-400">Replying to</a>
@@ -136,6 +151,16 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
                 <Slug slug={post?.parent?.user?.username} prefix="@"></Slug>
               </a>
             </Link>
+          </div>
+        )}
+        {post?.parent && post?.type === 'REPOST' && showParent && (
+          <div className="text-sm flex space-x-1">
+            <Link href={`/@${post?.parent?.user?.username}`} passHref>
+              <a>
+                <Slug slug={post?.parent?.user?.username} prefix="@"></Slug>
+              </a>
+            </Link>
+            <span>Retweeted</span>
           </div>
         )}
         <div className="flex justify-between items-center">
@@ -148,6 +173,7 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
         </div>
         {post?.type === 'POST' && <PostType post={post} />}
         {post?.type === 'REPLY' && <PostType post={post} />}
+        {post?.type === 'REPOST' && <RepostType post={post?.parent as Post} />}
         {post?.type === 'TASK' && <TaskType task={post} />}
         {post?.type === 'QUESTION' && <QuestionType question={post} />}
       </CardBody>

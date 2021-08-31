@@ -3,6 +3,7 @@ import { db } from '~/utils/prisma'
 
 import { hasLiked } from '../Common/hasLiked'
 import { createPost } from './mutations/createPost'
+import { createRepost } from './mutations/createRepost'
 import { deletePost } from './mutations/deletePost'
 import { editPost } from './mutations/editPost'
 import { getPosts } from './queries/getPosts'
@@ -137,6 +138,24 @@ builder.mutationField('createPost', (t) =>
     },
     resolve: async (query, root, { input }, { session }) => {
       return await createPost(query, input, session)
+    }
+  })
+)
+
+const CreateRepostInput = builder.inputType('CreateRepostInput', {
+  fields: (t) => ({
+    parentId: t.id({ required: false })
+  })
+})
+
+builder.mutationField('createRepost', (t) =>
+  t.prismaField({
+    type: 'Post',
+    args: {
+      input: t.arg({ type: CreateRepostInput })
+    },
+    resolve: async (query, root, { input }, { session }) => {
+      return await createRepost(query, input, session)
     }
   })
 )
