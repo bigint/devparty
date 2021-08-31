@@ -173,7 +173,7 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
         </div>
         {post?.type === 'POST' && <PostType post={post} />}
         {post?.type === 'REPLY' && <PostType post={post} />}
-        {post?.type === 'REPOST' && <RepostType post={post?.parent} />}
+        {post?.type === 'REPOST' && <RepostType post={post?.parent as Post} />}
         {post?.type === 'TASK' && <TaskType task={post} />}
         {post?.type === 'QUESTION' && <QuestionType question={post} />}
       </CardBody>
