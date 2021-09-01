@@ -139,6 +139,16 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
     })
   }
 
+  const handleRepost = (post: any) => {
+    togglePostLike({
+      variables: {
+        input: {
+          postId: post?.id
+        }
+      }
+    })
+  }
+
   return (
     <Card>
       <CardBody className="space-y-4">
@@ -180,7 +190,11 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
       </CardBody>
       <div className="flex px-4 py-3 gap-7 border-t dark:border-gray-800">
         <LikeButton entity={post} handleLike={handleLike} loading={false} />
-        <RepostButton entity={post} handleLike={handleLike} loading={false} />
+        <RepostButton
+          entity={post}
+          handleRepost={handleRepost}
+          loading={false}
+        />
         <Link href={`/posts/${post?.id}`} passHref>
           <button className="text-blue-500 hover:text-blue-400 flex items-center space-x-2">
             <ChatIcon className="h-5 w-5" />

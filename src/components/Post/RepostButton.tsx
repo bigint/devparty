@@ -8,23 +8,23 @@ import AppContext from '~/components/utils/AppContext'
 
 type Props = {
   entity: Post
-  handleLike: any
+  handleRepost: any
   loading: boolean
 }
 
-const RepostButton: React.FC<Props> = ({ entity, handleLike, loading }) => {
+const RepostButton: React.FC<Props> = ({ entity, handleRepost, loading }) => {
   const { currentUser } = useContext(AppContext)
   const router = useRouter()
-  const [isLiked, setIsLiked] = useState<boolean>(false)
+  const [isReposted, setIsReposted] = useState<boolean>(false)
 
   useEffect(() => {
-    if (entity?.hasLiked) setIsLiked(entity?.hasLiked)
+    if (entity?.hasLiked) setIsReposted(entity?.hasLiked)
   }, [entity])
 
   const toggleLike = () => {
     if (!currentUser) return router.push('/login')
-    setIsLiked(!isLiked)
-    handleLike(entity)
+    setIsReposted(!isReposted)
+    handleRepost(entity)
   }
 
   return (
@@ -34,7 +34,7 @@ const RepostButton: React.FC<Props> = ({ entity, handleLike, loading }) => {
       className="text-pink-500 hover:text-pink-400 flex items-center gap-2"
       disabled={loading}
     >
-      {isLiked ? (
+      {isReposted ? (
         <RefreshIcon className="h-5 w-5 text-green-600" />
       ) : (
         <RefreshIcon className="h-5 w-5 text-gray-600" />
