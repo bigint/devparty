@@ -192,10 +192,10 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
           <div className="text-sm flex space-x-1">
             <Link href={`/@${post?.parent?.user?.username}`} passHref>
               <a>
-                <Slug slug={post?.parent?.user?.username} prefix="@"></Slug>
+                <Slug slug={post?.user?.username} prefix="@"></Slug>
               </a>
             </Link>
-            <span>Retweeted</span>
+            <span>Reposted</span>
           </div>
         )}
         <div className="flex justify-between items-center">
