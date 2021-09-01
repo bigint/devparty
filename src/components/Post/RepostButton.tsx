@@ -39,9 +39,6 @@ const RepostButton: React.FC<Props> = ({ entity, handleRepost, loading }) => {
       ) : (
         <RefreshIcon className="h-5 w-5 text-gray-600" />
       )}
-      {(entity?.likes?.totalCount as number) > 0 && (
-        <div className="text-xs">{entity?.likes?.totalCount}</div>
-      )}
     </Switch>
   )
 }

@@ -16,6 +16,8 @@ import DeleteButton from '../DeleteButton'
 import LikeButton from '../LikeButton'
 import RepostButton from '../RepostButton'
 import {
+  CreateRepostMutation,
+  CreateRepostMutationVariables,
   TogglePostLikeMutation,
   TogglePostLikeMutationVariables
 } from './__generated__/index.generated'
@@ -129,6 +131,28 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
     }
   )
 
+  const [createRepost] = useMutation<
+    CreateRepostMutation,
+    CreateRepostMutationVariables
+  >(
+    gql`
+      mutation CreateRepostMutation($input: CreateRepostInput!) {
+        createRepost(input: $input) {
+          ...PostFragment
+        }
+      }
+      ${PostFragment}
+    `,
+    {
+      onError() {
+        toast.error('Something went wrong!')
+      },
+      onCompleted() {
+        toast.success('Successfully')
+      }
+    }
+  )
+
   const handleLike = (post: any) => {
     togglePostLike({
       variables: {
@@ -140,10 +164,10 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
   }
 
   const handleRepost = (post: any) => {
-    togglePostLike({
+    createRepost({
       variables: {
         input: {
-          postId: post?.id
+          parentId: post?.id
         }
       }
     })
