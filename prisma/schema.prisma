@@ -250,6 +250,14 @@ enum PostType {
   REPLY
 }
 
+enum LikeType {
+  LOVE
+  HAHA
+  WOW
+  SAD
+  ANGRY
+}
+
 enum NotificationType {
   POSTLIKE
   FOLLOW
