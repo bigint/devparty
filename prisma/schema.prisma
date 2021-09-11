@@ -251,7 +251,6 @@ enum PostType {
 }
 
 enum LikeType {
-  LIKE
   LOVE
   HAHA
   WOW
