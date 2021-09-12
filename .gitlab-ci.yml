@@ -1,50 +1,47 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 image: node:latest
-
 include:
-  - template: Security/Dependency-Scanning.gitlab-ci.yml
-  - template: Security/License-Scanning.gitlab-ci.yml
-
+- template: Security/Dependency-Scanning.gitlab-ci.yml
+- template: Security/License-Scanning.gitlab-ci.yml
+- template: Security/Secret-Detection.gitlab-ci.yml
 cache:
   paths:
-    - node_modules/
-    - .next/cache/
-
+  - node_modules/
+  - ".next/cache/"
 before_script:
-  - cp .env.example .env
-  - yarn install --frozen-lockfile --silent
-
-Lint 🌟:
+- cp .env.example .env
+- yarn install --frozen-lockfile --silent
+"Lint \U0001F31F":
   script:
-    - yarn lint
-
-Prettier 📚:
+  - yarn lint
+"Prettier \U0001F4DA":
   script:
-    - yarn prettier:check
-
-Generate 🧞‍♂️:
+  - yarn prettier:check
+"Generate \U0001F9DE‍♂️":
   script:
-    - yarn generate
-
-Typecheck 🧐:
+  - yarn generate
+"Typecheck \U0001F9D0":
   script:
-    - yarn generate
-    - yarn typecheck
-
-Build 👷‍♂️:
+  - yarn generate
+  - yarn typecheck
+"Build \U0001F477‍♂️":
   script:
-    - yarn build
-
-Migrate 🚚:
+  - yarn build
+"Migrate \U0001F69A":
   script:
-    - yarn prisma migrate reset --force
-    - yarn prisma migrate deploy
+  - yarn prisma migrate reset --force
+  - yarn prisma migrate deploy
   only:
-    - main
+  - main
   when: manual
-
 Housekeeping ✨:
   before_script: []
   script:
-    - curl --request POST --header "PRIVATE-TOKEN:$ACCESS_TOKEN" https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/housekeeping
+  - curl --request POST --header "PRIVATE-TOKEN:$ACCESS_TOKEN" https://gitlab.com/api/v4/projects/$CI_PROJECT_ID/housekeeping
   only:
-    - main
+  - main
