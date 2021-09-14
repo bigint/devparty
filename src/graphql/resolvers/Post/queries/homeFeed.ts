@@ -28,7 +28,7 @@ export const homeFeed = async (
         },
         spammy: false
       },
-      isDeleted: false
+      deleted: false
     },
     orderBy: {
       createdAt: 'desc'

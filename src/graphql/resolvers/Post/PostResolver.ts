@@ -144,7 +144,7 @@ builder.queryField('post', (t) =>
     resolve: async (query, root, { where }) => {
       return await db.post.findFirst({
         ...query,
-        where: { id: where.id, isDeleted: false },
+        where: { id: where.id, deleted: false },
         rejectOnNotFound: true
       })
     }

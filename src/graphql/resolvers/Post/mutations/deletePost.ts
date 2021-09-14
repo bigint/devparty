@@ -20,6 +20,6 @@ export const deletePost = async (
 
   return await db.post.update({
     where: { id: post?.id },
-    data: { isDeleted: true }
+    data: { deleted: true }
   })
 }

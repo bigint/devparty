@@ -18,7 +18,7 @@ export const getPosts = async (
       product: {
         id: where?.productId as string
       },
-      isDeleted: false
+      deleted: false
     },
     orderBy: {
       createdAt: 'desc'

@@ -35,7 +35,7 @@ builder.prismaObject('Topic', {
           ...query,
           where: {
             topics: { some: { topic: { name: root.name } } },
-            isDeleted: false
+            deleted: false
           },
           orderBy: { createdAt: 'desc' }
         })

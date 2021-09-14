@@ -28,7 +28,7 @@ builder.prismaObject('Product', {
       cursor: 'id',
       totalCount: true,
       query: () => ({
-        where: { isDeleted: false },
+        where: { deleted: false },
         orderBy: { createdAt: 'desc' }
       })
     })

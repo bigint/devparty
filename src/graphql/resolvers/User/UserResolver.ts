@@ -44,7 +44,7 @@ builder.prismaObject('User', {
       cursor: 'id',
       totalCount: true,
       query: () => ({
-        where: { isDeleted: false },
+        where: { deleted: false },
         orderBy: { createdAt: 'desc' }
       })
     }),
