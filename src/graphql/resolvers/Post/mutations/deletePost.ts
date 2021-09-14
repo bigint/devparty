@@ -18,7 +18,8 @@ export const deletePost = async (
     rejectOnNotFound: true
   })
 
-  return await db.post.delete({
-    where: { id: post?.id }
+  return await db.post.update({
+    where: { id: post?.id },
+    data: { isDeleted: true }
   })
 }
