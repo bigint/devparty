@@ -1,7 +1,8 @@
+import 'linkify-plugin-hashtag'
+import 'linkify-plugin-mention'
+
 import { gql, useMutation } from '@apollo/client'
-import * as linkify from 'linkifyjs'
-import hashtag from 'linkifyjs/plugins/hashtag'
-import Linkify from 'linkifyjs/react'
+import Linkify from 'linkify-react'
 import React from 'react'
 import toast from 'react-hot-toast'
 
@@ -18,8 +19,6 @@ import {
 interface Props {
   task: Post
 }
-
-hashtag(linkify)
 
 const TaskType: React.FC<Props> = ({ task }) => {
   const [editPost] = useMutation<EditPostMutation, EditPostMutationVariables>(

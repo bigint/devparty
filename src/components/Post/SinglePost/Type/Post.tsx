@@ -1,6 +1,7 @@
-import * as linkify from 'linkifyjs'
-import hashtag from 'linkifyjs/plugins/hashtag'
-import Linkify from 'linkifyjs/react'
+import 'linkify-plugin-hashtag'
+import 'linkify-plugin-mention'
+
+import Linkify from 'linkify-react'
 import React from 'react'
 
 import { Post } from '~/__generated__/schema.generated'
@@ -11,8 +12,6 @@ import Attachments from '../Attachments'
 interface Props {
   post: Post
 }
-
-hashtag(linkify)
 
 const PostType: React.FC<Props> = ({ post }) => {
   return (

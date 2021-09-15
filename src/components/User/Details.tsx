@@ -1,6 +1,9 @@
+import 'linkify-plugin-hashtag'
+import 'linkify-plugin-mention'
+
 import { LocationMarkerIcon, SupportIcon } from '@heroicons/react/outline'
 import { BadgeCheckIcon } from '@heroicons/react/solid'
-import Linkify from 'linkifyjs/react'
+import Linkify from 'linkify-react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useContext } from 'react'
