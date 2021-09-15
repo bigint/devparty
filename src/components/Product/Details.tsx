@@ -1,4 +1,7 @@
-import Linkify from 'linkifyjs/react'
+import 'linkify-plugin-hashtag'
+import 'linkify-plugin-mention'
+
+import Linkify from 'linkify-react'
 import Link from 'next/link'
 import { useContext } from 'react'
 
