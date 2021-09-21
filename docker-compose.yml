@@ -16,7 +16,7 @@ services:
     container_name: 'devparty-compiler'
     restart: unless-stopped
     build: .devcontainer
-    command: yarn codegen:graphql --watch
+    command: npm run codegen:graphql --watch
     volumes:
       - .:/srv/compiler:rw
     working_dir: /srv/compiler
