@@ -26,7 +26,7 @@ const Conversation: React.FC = () => {
         </div>
       </div>
       <div className="flex flex-col py-3 pl-1 pr-2 space-y-4 max-h-[65vh] overflow-y-auto">
-        <div className="chat-message">
+        <div>
           <div className="flex items-end">
             <div className="flex flex-col items-start order-2 max-w-xs mx-2 space-y-2 text-xs">
               <div>
@@ -42,7 +42,7 @@ const Conversation: React.FC = () => {
             />
           </div>
         </div>
-        <div className="chat-message">
+        <div>
           <div className="flex items-end justify-end">
             <div className="flex flex-col items-end order-1 max-w-xs mx-2 space-y-2 text-xs">
               <div>
@@ -59,7 +59,7 @@ const Conversation: React.FC = () => {
             />
           </div>
         </div>
-        <div className="chat-message">
+        <div>
           <div className="flex items-end">
             <div className="flex flex-col items-start order-2 max-w-xs mx-2 space-y-2 text-xs">
               <div>
@@ -80,7 +80,7 @@ const Conversation: React.FC = () => {
               <div>
                 <span className="inline-block px-4 py-2 bg-gray-200 dark:bg-gray-800 rounded-lg rounded-bl-none">
                   Check the line above (it ends with a # so, I'm running it as
-                  root )<pre># npm install -g @vue/devtools</pre>
+                  root )
                 </span>
               </div>
             </div>
@@ -91,7 +91,7 @@ const Conversation: React.FC = () => {
             />
           </div>
         </div>
-        <div className="chat-message">
+        <div>
           <div className="flex items-end justify-end">
             <div className="flex flex-col items-end order-1 max-w-xs mx-2 space-y-2 text-xs">
               <div>
@@ -108,7 +108,7 @@ const Conversation: React.FC = () => {
             />
           </div>
         </div>
-        <div className="chat-message">
+        <div>
           <div className="flex items-end">
             <div className="flex flex-col items-start order-2 max-w-xs mx-2 space-y-2 text-xs">
               <div>
@@ -125,7 +125,7 @@ const Conversation: React.FC = () => {
             />
           </div>
         </div>
-        <div className="chat-message">
+        <div>
           <div className="flex items-end justify-end">
             <div className="flex flex-col items-end order-1 max-w-xs mx-2 space-y-2 text-xs">
               <div>
@@ -147,7 +147,7 @@ const Conversation: React.FC = () => {
             />
           </div>
         </div>
-        <div className="chat-message">
+        <div>
           <div className="flex items-end">
             <div className="flex flex-col items-start order-2 max-w-xs mx-2 space-y-2 text-xs">
               <div>
@@ -170,7 +170,7 @@ const Conversation: React.FC = () => {
             />
           </div>
         </div>
-        <div className="chat-message">
+        <div>
           <div className="flex items-end justify-end">
             <div className="flex flex-col items-end order-1 max-w-xs mx-2 space-y-2 text-xs">
               <div>
@@ -187,7 +187,7 @@ const Conversation: React.FC = () => {
             />
           </div>
         </div>
-        <div className="chat-message">
+        <div>
           <div className="flex items-end">
             <div className="flex flex-col items-start order-2 max-w-xs mx-2 space-y-2 text-xs">
               <div>
