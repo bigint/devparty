@@ -15,7 +15,11 @@
     "codegen": "yarn codegen:schema && yarn codegen:graphql",
     "codegen:schema": "ts-node --transpile-only -r tsconfig-paths/register src/graphql/index.ts",
     "codegen:graphql": "graphql-codegen",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "tailwind-storybook": "postcss ./src/styles.css -o ./public/storybook/tailwind.storybook.css",
+    "tailwind-storybook-build": "NODE_ENV=production postcss ./src/styles.css -o ./storybook-static/storybook/tailwind.storybook.css",
+    "storybook": "yarn tailwind-storybook && start-storybook -s ./public -p 6006",
+    "build-storybook": "build-storybook && yarn tailwind-storybook-build"
   },
   "dependencies": {
     "@apollo/client": "^3.4.13",
@@ -65,10 +69,15 @@
     "zod": "^3.8.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.15.5",
     "@graphql-codegen/cli": "^2.2.0",
     "@graphql-codegen/near-operation-file-preset": "^2.1.4",
     "@graphql-codegen/typescript": "^2.2.1",
     "@graphql-codegen/typescript-operations": "^2.1.4",
+    "@storybook/addon-actions": "^6.3.8",
+    "@storybook/addon-essentials": "^6.3.8",
+    "@storybook/addon-links": "^6.3.8",
+    "@storybook/react": "^6.3.8",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
@@ -85,6 +94,7 @@
     "@types/url-regex-safe": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "autoprefixer": "^10.3.5",
+    "babel-loader": "^8.2.2",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.2",
     "eslint-plugin-prettier": "^4.0.0",
@@ -95,6 +105,7 @@
     "husky": "^7.0.2",
     "lint-staged": "^11.1.1",
     "postcss": "^8.3.8",
+    "postcss-cli": "^9.0.0",
     "prettier": "^2.4.1",
     "prisma": "3.1.1",
     "tailwindcss": "^2.2.15",
