@@ -1,6 +1,6 @@
 import { db } from '@utils/prisma'
 
-export const getMorePostsByUser = async (
+export const getMoreHighlightByUser = async (
   query: any,
   userId: string,
   type: string

@@ -8,7 +8,7 @@ import { createHighlight } from './mutations/createHighlight'
 import { deleteHighlight } from './mutations/deleteHighlight'
 import { editHighlight } from './mutations/editHighlight'
 import { exploreFeed } from './queries/exploreFeed'
-import { getMorePostsByUser } from './queries/getMorePostsByUser'
+import { getMoreHighlightByUser } from './queries/getMoreHighlightByUser'
 import { homeFeed } from './queries/homeFeed'
 
 builder.prismaObject('Highlight', {
@@ -72,7 +72,7 @@ builder.queryField('morePostsByUser', (t) =>
       type: t.arg.string()
     },
     resolve: async (query, parent, { userId, type }) => {
-      return await getMorePostsByUser(query, userId, type)
+      return await getMoreHighlightByUser(query, userId, type)
     }
   })
 )
