@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
 import SinglePost, { PostFragment } from '@components/Highlight/SingleHighlight'
-import PostsShimmer from '@components/shared/Shimmer/HighlightsShimmer'
+import HighlightsShimmer from '@components/shared/Shimmer/HighlightsShimmer'
 import { EmptyState } from '@components/ui/EmptyState'
 import { ErrorMessage } from '@components/ui/ErrorMessage'
 import { CollectionIcon } from '@heroicons/react/outline'
@@ -51,7 +51,7 @@ const ExploreFeed: React.FC = () => {
     }
   })
 
-  if (loading) return <PostsShimmer />
+  if (loading) return <HighlightsShimmer />
 
   return (
     <div>

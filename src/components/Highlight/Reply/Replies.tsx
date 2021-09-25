@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import PostsShimmer from '@components/shared/Shimmer/HighlightsShimmer'
+import HighlightsShimmer from '@components/shared/Shimmer/HighlightsShimmer'
 import { EmptyState } from '@components/ui/EmptyState'
 import { ErrorMessage } from '@components/ui/ErrorMessage'
 import { ReplyIcon } from '@heroicons/react/outline'
@@ -64,7 +64,7 @@ const Replies: React.FC<Props> = ({ post }) => {
     }
   })
 
-  if (loading) return <PostsShimmer />
+  if (loading) return <HighlightsShimmer />
 
   return (
     <div className="pb-5">
