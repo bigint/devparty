@@ -1,5 +1,6 @@
 import { Context, createGraphQLContext } from '@graphql/builder'
 import schema from '@graphql/index'
+import { withSentry } from '@sentry/nextjs'
 import { resolveSession } from '@utils/sessions'
 import { ExecutionResult, GraphQLError } from 'graphql'
 import depthLimit from 'graphql-depth-limit'
@@ -90,4 +91,4 @@ const handler: NextApiHandler = async (req, res) => {
   }
 }
 
-export default handler
+export default withSentry(handler)
