@@ -1,13 +1,14 @@
 const colors = require('tailwindcss/colors')
+const brandColors = require('./src/colors.ts')
 
 module.exports = {
   mode: 'jit',
   purge: ['./src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
+    colors: brandColors,
     extend: {
       colors: {
-        gray: colors.gray,
         brand: colors.violet
       }
     }
