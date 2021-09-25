@@ -18,7 +18,7 @@ const PostReply: React.FC<Props> = ({ notification }) => {
             <Slug slug={notification?.dispatcher?.username} prefix="@" />
             <div className="linkify">
               Replied to your{' '}
-              <Link href={`/posts/${notification?.post?.id}`}>
+              <Link href={`/highlights/${notification?.post?.id}`}>
                 <a>post</a>
               </Link>
             </div>

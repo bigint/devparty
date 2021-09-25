@@ -58,12 +58,12 @@ const MorePosts: React.FC<Props> = ({ post }) => {
       skip: !post?.user?.id
     }
   )
-  const posts = data?.morePostsByUser?.edges?.map((edge) => edge?.node)
+  const highlights = data?.morePostsByUser?.edges?.map((edge) => edge?.node)
 
   return (
     <MorePostsCard title={post?.user?.profile?.name}>
-      <ErrorMessage title="Failed to load more posts" error={error} />
-      {posts?.map((post: any) => (
+      <ErrorMessage title="Failed to load more highlights" error={error} />
+      {highlights?.map((post: any) => (
         <div key={post?.id} className="space-y-2">
           <div>{post?.title}</div>
           <div className="flex items-start space-x-1 text-sm">

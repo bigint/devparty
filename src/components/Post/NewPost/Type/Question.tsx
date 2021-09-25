@@ -57,7 +57,7 @@ const QuestionType: React.FC = () => {
         setAttachments([])
         form.reset()
         toast.success('Question has been created successfully!')
-        router.push(`/posts/${data?.createPost?.id}`)
+        router.push(`/highlights/${data?.createPost?.id}`)
       }
     }
   )

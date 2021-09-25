@@ -61,7 +61,7 @@ const ViewPost: React.FC = () => {
         }`}
         description={data?.post?.body.slice(0, 255) as string}
         image={data?.post?.user?.profile?.avatar as string}
-        path={`/posts/${data?.post?.id}`}
+        path={`/highlights/${data?.post?.id}`}
       />
       <GridItemEight>
         <div className="space-y-5">
