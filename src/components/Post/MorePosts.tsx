@@ -8,7 +8,7 @@ import { Post } from 'src/__generated__/schema.generated'
 
 import { MorePostsByUserQuery } from './__generated__/MorePosts.generated'
 
-export const MORE_POSTS_BY_USER_QUERY = gql`
+export const MORE_HIGHLIGHTS_BY_USER_QUERY = gql`
   query MorePostsByUserQuery($userId: ID!, $type: String!) {
     morePostsByUser(userId: $userId, type: $type) {
       edges {
@@ -49,7 +49,7 @@ const MorePostsCard = ({ title, children }: any) => {
 
 const MorePosts: React.FC<Props> = ({ post }) => {
   const { data, error } = useQuery<MorePostsByUserQuery>(
-    MORE_POSTS_BY_USER_QUERY,
+    MORE_HIGHLIGHTS_BY_USER_QUERY,
     {
       variables: {
         userId: post?.user?.id,
