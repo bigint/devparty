@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import DevpartySEO from '@components/shared/SEO'
-import PostShimmer from '@components/shared/Shimmer/PostShimmer'
+import PostShimmer from '@components/shared/Shimmer/HighlightShimmer'
 import UserProfileShimmer from '@components/shared/Shimmer/UserProfileShimmer'
 import UserCard from '@components/shared/UserCard'
 import { Card, CardBody } from '@components/ui/Card'

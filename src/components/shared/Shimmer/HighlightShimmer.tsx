@@ -2,7 +2,7 @@ import { Card, CardBody } from '@components/ui/Card'
 
 import UserProfileShimmer from './UserProfileShimmer'
 
-const PostShimmer: React.FC = () => {
+const HighlightShimmer: React.FC = () => {
   return (
     <Card>
       <CardBody className="space-y-4">
@@ -24,4 +24,4 @@ const PostShimmer: React.FC = () => {
   )
 }
 
-export default PostShimmer
+export default HighlightShimmer
