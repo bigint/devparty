@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
-import SinglePost, { PostFragment } from '@components/Post/SinglePost'
-import PostsShimmer from '@components/shared/Shimmer/PostsShimmer'
+import SinglePost, { PostFragment } from '@components/Highlight/SingleHighlight'
+import HighlightsShimmer from '@components/shared/Shimmer/HighlightsShimmer'
 import { EmptyState } from '@components/ui/EmptyState'
 import { ErrorMessage } from '@components/ui/ErrorMessage'
 import { CollectionIcon } from '@heroicons/react/outline'
@@ -14,7 +14,7 @@ const PRODUCT_FEED_QUERY = gql`
   query ProductFeedQuery($after: String, $slug: String!) {
     product(slug: $slug) {
       id
-      posts(first: 10, after: $after) {
+      highlights(first: 10, after: $after) {
         pageInfo {
           endCursor
           hasNextPage
@@ -45,8 +45,8 @@ const ProductFeed: React.FC<Props> = ({ product }) => {
     }
   )
 
-  const posts = data?.product?.posts?.edges?.map((edge) => edge?.node)
-  const pageInfo = data?.product?.posts?.pageInfo
+  const highlights = data?.product?.highlights?.edges?.map((edge) => edge?.node)
+  const pageInfo = data?.product?.highlights?.pageInfo
 
   const { observe } = useInView({
     threshold: 1,
@@ -65,24 +65,24 @@ const ProductFeed: React.FC<Props> = ({ product }) => {
     }
   })
 
-  if (loading) return <PostsShimmer />
+  if (loading) return <HighlightsShimmer />
 
   return (
     <div>
-      <ErrorMessage title="Failed to load posts" error={error} />
+      <ErrorMessage title="Failed to load highlights" error={error} />
       <div className="space-y-3">
-        {posts?.length === 0 ? (
+        {highlights?.length === 0 ? (
           <EmptyState
             message={
               <div>
-                <span>No posts found in</span>
+                <span>No highlights found in</span>
                 <span className="font-bold ml-1">{product?.name}</span>
               </div>
             }
             icon={<CollectionIcon className="h-8 w-8" />}
           />
         ) : (
-          posts?.map((post: any) => (
+          highlights?.map((post: any) => (
             <SinglePost key={post?.id} post={post} showParent />
           ))
         )}

@@ -29,7 +29,7 @@ export const UserFragment = gql`
     following {
       totalCount
     }
-    posts {
+    highlights {
       totalCount
     }
     profile {

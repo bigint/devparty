@@ -1,0 +1,14 @@
+import ViewPost, { HIGHLIGHT_QUERY as query } from '@components/Highlight/ViewHighlight'
+import { preloadQuery } from '@utils/apollo'
+import { GetServerSidePropsContext } from 'next'
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  return preloadQuery(context, {
+    query,
+    variables: { id: context.params!.highlightId }
+  })
+}
+
+export default ViewPost

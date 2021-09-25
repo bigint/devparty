@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
-import SinglePost, { PostFragment } from '@components/Post/SinglePost'
-import PostsShimmer from '@components/shared/Shimmer/PostsShimmer'
+import SinglePost, { PostFragment } from '@components/Highlight/SingleHighlight'
+import HighlightsShimmer from '@components/shared/Shimmer/HighlightsShimmer'
 import { EmptyState } from '@components/ui/EmptyState'
 import { ErrorMessage } from '@components/ui/ErrorMessage'
 import { CollectionIcon } from '@heroicons/react/outline'
@@ -14,7 +14,7 @@ const USER_FEED_QUERY = gql`
   query UserFeedQuery($after: String, $username: String!) {
     user(username: $username) {
       id
-      posts(first: 10, after: $after) {
+      highlights(first: 10, after: $after) {
         totalCount
         pageInfo {
           endCursor
@@ -49,8 +49,8 @@ const UserFeed: React.FC<Props> = ({ feedType }) => {
     }
   )
 
-  const posts = data?.user?.posts?.edges?.map((edge) => edge?.node)
-  const pageInfo = data?.user?.posts?.pageInfo
+  const highlights = data?.user?.highlights?.edges?.map((edge) => edge?.node)
+  const pageInfo = data?.user?.highlights?.pageInfo
 
   const { observe } = useInView({
     threshold: 1,
@@ -69,13 +69,13 @@ const UserFeed: React.FC<Props> = ({ feedType }) => {
     }
   })
 
-  if (loading) return <PostsShimmer />
+  if (loading) return <HighlightsShimmer />
 
   return (
     <>
-      <ErrorMessage title="Failed to load posts" error={error} />
+      <ErrorMessage title="Failed to load highlights" error={error} />
       <div className="space-y-3">
-        {data?.user?.posts?.totalCount === 0 ? (
+        {data?.user?.highlights?.totalCount === 0 ? (
           <EmptyState
             message={
               <div>
@@ -86,7 +86,7 @@ const UserFeed: React.FC<Props> = ({ feedType }) => {
             icon={<CollectionIcon className="h-8 w-8" />}
           />
         ) : (
-          posts?.map((post: any) => (
+          highlights?.map((post: any) => (
             <SinglePost key={post?.id} post={post} showParent />
           ))
         )}

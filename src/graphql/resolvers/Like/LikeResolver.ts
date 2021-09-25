@@ -1,6 +1,5 @@
 import { builder } from '@graphql/builder'
-
-import { togglePostLike } from '../Post/mutations/togglePostLike'
+import { toggleHighlightLike } from '../Highlight/mutations/toggleHighlightLike'
 
 builder.prismaObject('Like', {
   findUnique: (like) => ({ id: like.id }),
@@ -12,7 +11,7 @@ builder.prismaObject('Like', {
 
     // Relations
     user: t.relation('user'),
-    post: t.relation('post')
+    highlight: t.relation('highlight')
   })
 })
 
@@ -22,14 +21,18 @@ const TogglePostLikeInput = builder.inputType('TogglePostLikeInput', {
   })
 })
 
-builder.mutationField('togglePostLike', (t) =>
+builder.mutationField('toggleHighlightLike', (t) =>
   t.prismaField({
-    type: 'Post',
+    type: 'Highlight',
     args: { input: t.arg({ type: TogglePostLikeInput }) },
     authScopes: { user: true },
     nullable: true,
     resolve: async (query, parent, { input }, { session }) => {
-      return await togglePostLike(query, session?.userId as string, input?.id)
+      return await toggleHighlightLike(
+        query,
+        session?.userId as string,
+        input?.id
+      )
     }
   })
 )

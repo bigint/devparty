@@ -32,7 +32,7 @@ model User {
   featuredAt DateTime?
 
   // Relations
-  posts                  Post[]
+  highlights                  Highlight[]
   ownedProducts          Product[]      @relation("owner")
   subscribedProducts     Product[]      @relation("subscribed")
   sessions               Session[]
@@ -126,12 +126,12 @@ model Tip {
   @@map("tips")
 }
 
-model Post {
+model Highlight {
   id          String   @id @default(uuid())
   title       String?
   body        String   @db.Text
   done        Boolean  @default(false)
-  type        PostType @default(POST)
+  type        HighlightType @default(POST)
   attachments Json?
   hidden      Boolean  @default(false)
 
@@ -145,27 +145,27 @@ model Post {
   product      Product?       @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId    String?
   likes        Like[]
-  topics       PostTopic[]
+  topics       HighlightTopic[]
   parentId     String?
-  parent       Post?          @relation("replies", fields: [parentId], references: [id], onDelete: SetNull)
-  replies      Post[]         @relation("replies")
-  notification Notification[] @relation("post")
+  parent       Highlight?          @relation("replies", fields: [parentId], references: [id], onDelete: SetNull)
+  replies      Highlight[]         @relation("replies")
+  notification Notification[] @relation("highlight")
 
   // Attributes
-  @@map("posts")
+  @@map("highlights")
 }
 
-model PostTopic {
+model HighlightTopic {
   id String @id @default(uuid())
 
   // Relations
-  post    Post?   @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId  String?
+  highlight    Highlight?   @relation(fields: [highlightId], references: [id], onDelete: Cascade)
+  highlightId  String?
   topic   Topic?  @relation(fields: [topicId], references: [id], onDelete: Cascade)
   topicId String?
 
   // Attributes
-  @@map("post_topics")
+  @@map("highlight_topics")
 }
 
 model Topic {
@@ -178,7 +178,7 @@ model Topic {
   createdAt DateTime @default(now())
 
   // Relations
-  posts    PostTopic[]
+  highlights    HighlightTopic[]
   starrers User[]
 
   // Attributes
@@ -194,12 +194,12 @@ model Like {
   // Relations
   user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
-  post         Post?          @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId       String?
+  highlight         Highlight?          @relation(fields: [highlightId], references: [id], onDelete: Cascade)
+  highlightId       String?
   notification Notification[] @relation("like")
 
   // Attributes
-  @@unique([userId, postId], name: "likeIdentifier")
+  @@unique([userId, highlightId], name: "likeIdentifier")
   @@map("likes")
 }
 
@@ -225,7 +225,7 @@ model Product {
   owner        User?          @relation("owner", fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId      String?
   subscribers  User[]         @relation("subscribed")
-  posts        Post[]
+  highlights        Highlight[]
   notification Notification[] @relation("product")
 
   // Attributes
@@ -269,8 +269,8 @@ model Notification {
   likeId       String?
   product      Product? @relation("product", fields: [productId], references: [id], onDelete: Cascade)
   productId    String?
-  post   Post?   @relation("post", fields: [postId], references: [id], onDelete: Cascade)
-  postId String?
+  highlight   Highlight?   @relation("highlight", fields: [highlightId], references: [id], onDelete: Cascade)
+  highlightId String?
 
   // Attributes
   @@map("notifications")
@@ -328,7 +328,7 @@ model Message {
 }
 
 // Types
-enum PostType {
+enum HighlightType {
   POST
   TASK
   QUESTION
@@ -336,9 +336,9 @@ enum PostType {
 }
 
 enum NotificationType {
-  // Post
-  POST_LIKE
-  POST_REPLY
+  // Highlight
+  HIGHLIGHT_LIKE
+  HIGHLIGHT_REPLY
 
   // User
   USER_MENTION
@@ -349,5 +349,5 @@ enum NotificationType {
 }
 
 enum LogActionType {
-  POST_LIKE
+  HIGHLIGHT_LIKE
 }

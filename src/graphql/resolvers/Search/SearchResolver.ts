@@ -9,7 +9,7 @@ builder.queryField('searchPosts', (t) =>
     defaultSize: 20,
     maxSize: 100,
     resolve: async (query, parent, { keyword }) => {
-      return await db.post.findMany({
+      return await db.highlight.findMany({
         ...query,
         where: { body: { contains: keyword } }
       })

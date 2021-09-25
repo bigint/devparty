@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import { PostFragment } from '@components/Post/SinglePost'
+import { PostFragment } from '@components/Highlight/SingleHighlight'
 import { EmptyState } from '@components/ui/EmptyState'
 import { ErrorMessage } from '@components/ui/ErrorMessage'
 import { PageLoading } from '@components/ui/PageLoading'
@@ -9,8 +9,8 @@ import useInView from 'react-cool-inview'
 
 import { NotificationsQuery } from './__generated__/index.generated'
 import NotificationType from './NotificationType'
-import PostLike from './type/PostLike'
-import PostReply from './type/PostReply'
+import PostLike from './type/HighlightLike'
+import PostReply from './type/HighlightReply'
 import ProductSubscribe from './type/ProductSubscribe'
 import UserFollow from './type/UserFollow'
 
@@ -106,10 +106,10 @@ const Notifications: React.FC = () => {
             <div className="space-y-4">
               {notifications?.map((notification: any) => (
                 <div key={notification?.id}>
-                  {notification?.type === 'POST_LIKE' && (
+                  {notification?.type === 'HIGHLIGHT_LIKE' && (
                     <PostLike notification={notification} />
                   )}
-                  {notification?.type === 'POST_REPLY' && (
+                  {notification?.type === 'HIGHLIGHT_REPLY' && (
                     <PostReply notification={notification} />
                   )}
                   {notification?.type === 'USER_FOLLOW' && (

@@ -1,19 +1,20 @@
 import { gql, useQuery } from '@apollo/client'
-import SinglePost, { PostFragment } from '@components/Highlight/SingleHighlight'
 import HighlightsShimmer from '@components/shared/Shimmer/HighlightsShimmer'
 import { EmptyState } from '@components/ui/EmptyState'
 import { ErrorMessage } from '@components/ui/ErrorMessage'
-import { CollectionIcon } from '@heroicons/react/outline'
+import { ReplyIcon } from '@heroicons/react/outline'
 import React from 'react'
 import useInView from 'react-cool-inview'
+import { Post } from 'src/__generated__/schema.generated'
 
-import { TopicFeedQuery } from './__generated__/Feed.generated'
+import SinglePost, { PostFragment } from '../SingleHighlight'
+import { RepliesQuery } from './__generated__/Replies.generated'
 
-export const TOPIC_FEED_QUERY = gql`
-  query TopicFeedQuery($after: String, $name: String!) {
-    topic(name: $name) {
+export const REPLIES_QUERY = gql`
+  query RepliesQuery($after: String, $id: ID!) {
+    post(id: $id) {
       id
-      highlights(first: 10, after: $after) {
+      replies(first: 10, after: $after) {
         pageInfo {
           endCursor
           hasNextPage
@@ -30,22 +31,21 @@ export const TOPIC_FEED_QUERY = gql`
 `
 
 interface Props {
-  topic: string
+  post: Post
 }
 
-const TopicFeed: React.FC<Props> = ({ topic }) => {
-  const { data, loading, error, fetchMore } = useQuery<TopicFeedQuery>(
-    TOPIC_FEED_QUERY,
+const Replies: React.FC<Props> = ({ post }) => {
+  const { data, loading, error, fetchMore } = useQuery<RepliesQuery>(
+    REPLIES_QUERY,
     {
       variables: {
         after: null,
-        name: topic
-      },
-      skip: !topic
+        id: post?.id
+      }
     }
   )
-  const highlights = data?.topic?.highlights?.edges?.map((edge) => edge?.node)
-  const pageInfo = data?.topic?.highlights?.pageInfo
+  const replies = data?.post?.replies?.edges?.map((edge) => edge?.node)
+  const pageInfo = data?.post?.replies?.pageInfo
 
   const { observe } = useInView({
     threshold: 1,
@@ -67,17 +67,17 @@ const TopicFeed: React.FC<Props> = ({ topic }) => {
   if (loading) return <HighlightsShimmer />
 
   return (
-    <div>
-      <ErrorMessage title="Failed to load highlights" error={error} />
+    <div className="pb-5">
+      <ErrorMessage title="Failed to load replies" error={error} />
       <div className="space-y-3">
-        {highlights?.length === 0 ? (
+        {replies?.length === 0 ? (
           <EmptyState
-            message="No highlights found, follow some users!"
-            icon={<CollectionIcon className="h-8 w-8" />}
+            message="Be the first one to reply!"
+            icon={<ReplyIcon className="h-8 w-8" />}
           />
         ) : (
-          highlights?.map((post: any) => (
-            <SinglePost key={post?.id} post={post} showParent />
+          replies?.map((reply: any) => (
+            <SinglePost key={reply?.id} post={reply} />
           ))
         )}
         {pageInfo?.hasNextPage && <span ref={observe}></span>}
@@ -86,4 +86,4 @@ const TopicFeed: React.FC<Props> = ({ topic }) => {
   )
 }
 
-export default TopicFeed
+export default Replies

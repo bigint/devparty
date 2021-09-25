@@ -21,7 +21,7 @@ export const TOPIC_QUERY = gql`
       name
       image
       description
-      postsCount
+      highlightsCount
       hasStarted
     }
   }
@@ -64,7 +64,7 @@ const ViewTopic: React.FC = () => {
                   <Star topic={data?.topic as Topic} />
                 </div>
                 <div className="text-gray-600 dark:text-gray-300">
-                  {data?.topic?.postsCount} Posts
+                  {data?.topic?.highlightsCount} Posts
                 </div>
               </div>
               {data?.topic?.description && (

@@ -12,12 +12,12 @@ const db = new PrismaClient()
 async function main() {
   await db.topic.deleteMany()
   console.log('All topics are deleted 🗑️')
-  await db.postTopic.deleteMany()
-  console.log('All post topics are deleted 🗑️')
+  await db.highlightTopic.deleteMany()
+  console.log('All highlight topics are deleted 🗑️')
   await db.like.deleteMany()
   console.log('All likes are deleted 🗑️')
-  await db.post.deleteMany()
-  console.log('All posts are deleted 🗑️')
+  await db.highlight.deleteMany()
+  console.log('All highlights are deleted 🗑️')
   await db.product.deleteMany()
   console.log('All products are deleted 🗑️')
   await db.notification.deleteMany()
@@ -52,7 +52,7 @@ async function main() {
           }
         },
         integrations: { create: {} },
-        posts: {
+        highlights: {
           create: {
             body: faker.lorem.sentence(20)
           }
@@ -106,7 +106,7 @@ async function main() {
     const post = hplipsum(10)
     const done = faker.datatype.boolean()
     console.log(`Seeding Post - ${post} ✅`)
-    await db.post.create({
+    await db.highlight.create({
       data: {
         body: post,
         done,

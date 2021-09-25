@@ -26,7 +26,7 @@ export const STAFF_TOOLS_DASHBOARD_QUERY = gql`
     stats {
       users
       products
-      posts
+      highlights
       likes
       topics
       badges
@@ -70,7 +70,8 @@ const StaffToolsDashboard: React.FC = () => {
               <div className="flex items-center space-x-1.5">
                 <CollectionIcon className="h-4 w-4" />
                 <div>
-                  <span className="font-bold">{data?.stats?.posts}</span> Posts
+                  <span className="font-bold">{data?.stats?.highlights}</span>{' '}
+                  Posts
                 </div>
               </div>
               <div className="flex items-center space-x-1.5">

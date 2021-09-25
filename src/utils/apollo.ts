@@ -74,7 +74,7 @@ export function createApolloClient({ initialState, headers }: ClientOptions) {
         typePolicies: {
           Query: {
             fields: {
-              posts: relayStylePagination([]),
+              highlights: relayStylePagination([]),
               users: relayStylePagination([]),
               homeFeed: relayStylePagination(['type']),
               exploreFeed: relayStylePagination([]),
@@ -84,19 +84,19 @@ export function createApolloClient({ initialState, headers }: ClientOptions) {
           },
           Topic: {
             fields: {
-              posts: relayStylePagination()
+              highlights: relayStylePagination()
             }
           },
           User: {
             fields: {
-              posts: relayStylePagination([]),
+              highlights: relayStylePagination([]),
               following: relayStylePagination([]),
               followers: relayStylePagination([])
             }
           },
           Product: {
             fields: {
-              posts: relayStylePagination([])
+              highlights: relayStylePagination([])
             }
           },
           Post: {

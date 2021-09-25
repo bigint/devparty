@@ -6,7 +6,7 @@ import {
   SearchUsersQuery
 } from './__generated__/Search.generated'
 
-export const SEARCH_POSTS_QUERY = gql`
+export const SEARCH_HIGHLIGHTS_QUERY = gql`
   query SearchPostsQuery($keyword: String!) {
     searchPosts(first: 5, keyword: $keyword) {
       edges {
@@ -46,7 +46,9 @@ export const SEARCH_PRODUCTS_QUERY = gql`
 `
 
 const Search: React.FC = () => {
-  const [searchPosts, {}] = useLazyQuery<SearchPostsQuery>(SEARCH_POSTS_QUERY)
+  const [searchPosts, {}] = useLazyQuery<SearchPostsQuery>(
+    SEARCH_HIGHLIGHTS_QUERY
+  )
   const [searchUsers, {}] = useLazyQuery<SearchUsersQuery>(SEARCH_USERS_QUERY)
   const [searchProducts, {}] = useLazyQuery<SearchProductsQuery>(
     SEARCH_PRODUCTS_QUERY

@@ -1,0 +1,17 @@
+import { db } from '@utils/prisma'
+
+export const getMoreHighlightByUser = async (
+  query: any,
+  userId: string,
+  type: string
+) => {
+  return await db.highlight.findMany({
+    ...query,
+    take: 5,
+    where: {
+      type: type,
+      user: { id: userId, spammy: false }
+    },
+    orderBy: { createdAt: 'desc' }
+  })
+}
