@@ -16,7 +16,7 @@ async function main() {
   console.log('All post topics are deleted 🗑️')
   await db.like.deleteMany()
   console.log('All likes are deleted 🗑️')
-  await db.post.deleteMany()
+  await db.highlight.deleteMany()
   console.log('All highlights are deleted 🗑️')
   await db.product.deleteMany()
   console.log('All products are deleted 🗑️')
@@ -106,7 +106,7 @@ async function main() {
     const post = hplipsum(10)
     const done = faker.datatype.boolean()
     console.log(`Seeding Post - ${post} ✅`)
-    await db.post.create({
+    await db.highlight.create({
       data: {
         body: post,
         done,

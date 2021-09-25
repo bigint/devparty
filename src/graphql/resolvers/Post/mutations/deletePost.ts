@@ -7,7 +7,7 @@ export const deletePost = async (
   input: EditPostInput | null | undefined,
   session: Session | null | undefined
 ) => {
-  const post = await db.post.findFirst({
+  const post = await db.highlight.findFirst({
     where: {
       id: input?.id,
       userId: session!.userId
@@ -16,7 +16,7 @@ export const deletePost = async (
     rejectOnNotFound: true
   })
 
-  await db.post.delete({ where: { id: post?.id } })
+  await db.highlight.delete({ where: { id: post?.id } })
 
   return Result.SUCCESS
 }

@@ -2,7 +2,7 @@ import { createNotification } from '@graphql/resolvers/Notification/mutations/cr
 import { getMentions } from '@graphql/utils/getMentions'
 import { getTopics } from '@graphql/utils/getTopics'
 import { parseTopics } from '@graphql/utils/parseTopics'
-import { PostType, Session } from '@prisma/client'
+import { HighlightType, Session } from '@prisma/client'
 import { db } from '@utils/prisma'
 import { CreatePostInput } from 'src/__generated__/schema.generated'
 
@@ -41,7 +41,7 @@ export const createPost = async (
   let parentId = null
 
   if (input.parentId) {
-    const parent = await db.post.findUnique({
+    const parent = await db.highlight.findUnique({
       ...query,
       where: { id: input.parentId }
     })
@@ -52,7 +52,7 @@ export const createPost = async (
     }
   }
 
-  const post = await db.post.create({
+  const post = await db.highlight.create({
     ...query,
     data: {
       userId: session!.userId,
@@ -60,7 +60,7 @@ export const createPost = async (
       body: input.body,
       done: input.done,
       attachments: input.attachments ? input.attachments : undefined,
-      type: input.type as PostType,
+      type: input.type as HighlightType,
       productId: input.productId ? input.productId : null,
       topics: {
         create: parseTopics(getTopics(input.body))
@@ -70,7 +70,7 @@ export const createPost = async (
   })
 
   if (post?.type === 'REPLY' && session!.userId !== post?.parentId) {
-    const parent = await db.post.findUnique({
+    const parent = await db.highlight.findUnique({
       where: { id: post?.parentId! }
     })
 

@@ -22,7 +22,7 @@ export const togglePostLike = async (
       })
     }
 
-    const post = await db.post.findFirst({
+    const post = await db.highlight.findFirst({
       ...query,
       where: { id: postId }
     })

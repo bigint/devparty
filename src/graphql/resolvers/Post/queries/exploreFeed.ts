@@ -1,7 +1,7 @@
 import { db } from '@utils/prisma'
 
 export const exploreFeed = async (query: any) => {
-  return await db.post.findMany({
+  return await db.highlight.findMany({
     ...query,
     where: { user: { spammy: false }, hidden: false },
     orderBy: [

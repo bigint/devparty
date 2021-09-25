@@ -48,7 +48,7 @@ export const homeFeed = async (
     userTopics = topics
   }
 
-  return await db.post.findMany({
+  return await db.highlight.findMany({
     ...query,
     where: {
       type: type === 'ALL' ? undefined : (type as PostType),

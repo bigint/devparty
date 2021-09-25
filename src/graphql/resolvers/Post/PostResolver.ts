@@ -107,7 +107,7 @@ builder.queryField('post', (t) =>
     type: 'Post',
     args: { id: t.arg.id() },
     resolve: async (query, parent, { id }) => {
-      return await db.post.findFirst({
+      return await db.highlight.findFirst({
         ...query,
         where: { id, hidden: false },
         rejectOnNotFound: true

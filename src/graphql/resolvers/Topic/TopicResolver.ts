@@ -29,7 +29,7 @@ builder.prismaObject('Topic', {
       defaultSize: 20,
       maxSize: 100,
       resolve: (query, parent) =>
-        db.post.findMany({
+        db.highlight.findMany({
           ...query,
           where: {
             topics: { some: { topic: { name: parent.name } } },

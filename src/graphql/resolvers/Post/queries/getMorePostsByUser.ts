@@ -5,7 +5,7 @@ export const getMorePostsByUser = async (
   userId: string,
   type: string
 ) => {
-  return await db.post.findMany({
+  return await db.highlight.findMany({
     ...query,
     take: 5,
     where: {
