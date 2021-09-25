@@ -1,6 +1,6 @@
 import { builder } from '@graphql/builder'
 
-import { togglePostLike } from '../Post/mutations/togglePostLike'
+import { togglePostLike } from '../Highlight/mutations/togglePostLike'
 
 builder.prismaObject('Like', {
   findUnique: (like) => ({ id: like.id }),
