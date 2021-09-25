@@ -21,10 +21,6 @@ class DevpartyDocument extends Document<Props> {
         <Head>
           <link rel="icon" href="/favicon.svg" />
           <meta name="theme-color" content="#ffffff" />
-          <link
-            href="https://fonts.cdnfonts.com/css/circular-std"
-            rel="stylesheet"
-          />
         </Head>
         <body>
           <Main />

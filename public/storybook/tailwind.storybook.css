@@ -2321,6 +2321,8 @@ select {
 	-webkit-line-clamp: 2;
 }
 
+@import url('https://fonts.cdnfonts.com/css/circular-std');
+
 body {
   font-family: 'Circular Std', Helvetica, Arial, sans-serif;
   --tw-bg-opacity: 1;
