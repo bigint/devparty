@@ -12,7 +12,7 @@ interface Props {
   notification: Notification
 }
 
-const PostLike: React.FC<Props> = ({ notification }) => {
+const HighlightLike: React.FC<Props> = ({ notification }) => {
   return (
     <Card>
       <CardBody className="space-y-3">
@@ -39,4 +39,4 @@ const PostLike: React.FC<Props> = ({ notification }) => {
   )
 }
 
-export default PostLike
+export default HighlightLike

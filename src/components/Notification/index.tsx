@@ -9,7 +9,7 @@ import useInView from 'react-cool-inview'
 
 import { NotificationsQuery } from './__generated__/index.generated'
 import NotificationType from './NotificationType'
-import PostLike from './type/PostLike'
+import PostLike from './type/HighlightLike'
 import PostReply from './type/PostReply'
 import ProductSubscribe from './type/ProductSubscribe'
 import UserFollow from './type/UserFollow'
