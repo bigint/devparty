@@ -17,7 +17,7 @@ async function main() {
   await db.like.deleteMany()
   console.log('All likes are deleted 🗑️')
   await db.post.deleteMany()
-  console.log('All posts are deleted 🗑️')
+  console.log('All highlights are deleted 🗑️')
   await db.product.deleteMany()
   console.log('All products are deleted 🗑️')
   await db.notification.deleteMany()
@@ -52,7 +52,7 @@ async function main() {
           }
         },
         integrations: { create: {} },
-        posts: {
+        highlights: {
           create: {
             body: faker.lorem.sentence(20)
           }

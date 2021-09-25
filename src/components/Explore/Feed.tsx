@@ -11,7 +11,7 @@ import { ExploreFeedQuery } from './__generated__/Feed.generated'
 
 export const EXPLORE_FEED_QUERY = gql`
   query ExploreFeedQuery($after: String) {
-    posts: exploreFeed(first: 10, after: $after) {
+    highlights: exploreFeed(first: 10, after: $after) {
       pageInfo {
         endCursor
         hasNextPage
@@ -31,8 +31,8 @@ const ExploreFeed: React.FC = () => {
     EXPLORE_FEED_QUERY,
     { variables: { after: null } }
   )
-  const posts = data?.posts?.edges?.map((edge) => edge?.node)
-  const pageInfo = data?.posts?.pageInfo
+  const highlights = data?.highlights?.edges?.map((edge) => edge?.node)
+  const pageInfo = data?.highlights?.pageInfo
 
   const { observe } = useInView({
     threshold: 1,
@@ -55,15 +55,15 @@ const ExploreFeed: React.FC = () => {
 
   return (
     <div>
-      <ErrorMessage title="Failed to load posts" error={error} />
+      <ErrorMessage title="Failed to load highlights" error={error} />
       <div className="space-y-3">
-        {posts?.length === 0 ? (
+        {highlights?.length === 0 ? (
           <EmptyState
-            message="No posts found, follow some users!"
+            message="No highlights found, follow some users!"
             icon={<CollectionIcon className="h-8 w-8" />}
           />
         ) : (
-          posts?.map((post: any) => (
+          highlights?.map((post: any) => (
             <SinglePost key={post?.id} post={post} showParent />
           ))
         )}
