@@ -1,3 +1,4 @@
+import { withSentry } from '@sentry/nextjs'
 import Redis from 'ioredis'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { unfurl } from 'unfurl.js'
@@ -45,4 +46,4 @@ const oembed = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default oembed
+export default withSentry(oembed)
