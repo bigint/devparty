@@ -3,7 +3,7 @@ import { Session } from '@prisma/client'
 import { db } from '@utils/prisma'
 import { EditPostInput } from 'src/__generated__/schema.generated'
 
-export const deletePost = async (
+export const deleteHighlight = async (
   input: EditPostInput | null | undefined,
   session: Session | null | undefined
 ) => {

@@ -31,13 +31,13 @@ interface Props {
 
 const NewReply: React.FC<Props> = ({ post }) => {
   const [attachments, setAttachments] = useState<string[]>([])
-  const [createPost, createPostResult] = useMutation<
+  const [createHighlight, createHighlightResult] = useMutation<
     NewReplyMutation,
     NewReplyMutationVariables
   >(
     gql`
       mutation NewReplyMutation($input: CreatePostInput!) {
-        createPost(input: $input) {
+        createHighlight(input: $input) {
           id
           body
         }
@@ -72,7 +72,7 @@ const NewReply: React.FC<Props> = ({ post }) => {
           form={form}
           className="space-y-1"
           onSubmit={({ body }) =>
-            createPost({
+            createHighlight({
               variables: {
                 input: {
                   parentId: post?.id,
@@ -87,7 +87,7 @@ const NewReply: React.FC<Props> = ({ post }) => {
         >
           <ErrorMessage
             title="Failed to create reply"
-            error={createPostResult.error}
+            error={createHighlightResult.error}
           />
           <TextArea {...form.register('body')} placeholder="Post your reply" />
           <div className="flex justify-between items-center">

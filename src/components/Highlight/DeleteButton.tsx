@@ -13,13 +13,13 @@ type Props = {
 }
 
 const DeleteButton: React.FC<Props> = ({ post }) => {
-  const [deletePost] = useMutation<
+  const [deleteHighlight] = useMutation<
     DeletePostMutation,
     DeletePostMutationVariables
   >(
     gql`
       mutation DeletePostMutation($input: DeletePostInput!) {
-        deletePost(input: $input)
+        deleteHighlight(input: $input)
       }
     `,
     {
@@ -32,7 +32,9 @@ const DeleteButton: React.FC<Props> = ({ post }) => {
   return (
     <button
       className="text-red-500 hover:text-red-400 flex items-center space-x-2"
-      onClick={() => deletePost({ variables: { input: { id: post?.id } } })}
+      onClick={() =>
+        deleteHighlight({ variables: { input: { id: post?.id } } })
+      }
     >
       <TrashIcon className="h-5 w-5" />
     </button>

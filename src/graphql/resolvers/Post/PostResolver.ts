@@ -4,8 +4,8 @@ import urlRegexSafe from 'url-regex-safe'
 
 import { hasLiked } from '../Like/queries/hasLiked'
 import { Result } from '../ResultResolver'
-import { createPost } from './mutations/createHighlight'
-import { deletePost } from './mutations/deleteHighlight'
+import { createHighlight } from './mutations/createHighlight'
+import { deleteHighlight } from './mutations/deleteHighlight'
 import { editPost } from './mutations/editHighlight'
 import { exploreFeed } from './queries/exploreFeed'
 import { getMorePostsByUser } from './queries/getMorePostsByUser'
@@ -131,12 +131,12 @@ const CreatePostInput = builder.inputType('CreatePostInput', {
   })
 })
 
-builder.mutationField('createPost', (t) =>
+builder.mutationField('createHighlight', (t) =>
   t.prismaField({
     type: 'Post',
     args: { input: t.arg({ type: CreatePostInput }) },
     resolve: async (query, parent, { input }, { session }) => {
-      return await createPost(query, input, session)
+      return await createHighlight(query, input, session)
     }
   })
 )
@@ -165,12 +165,12 @@ const DeletePostInput = builder.inputType('DeletePostInput', {
   })
 })
 
-builder.mutationField('deletePost', (t) =>
+builder.mutationField('deleteHighlight', (t) =>
   t.field({
     type: Result,
     args: { input: t.arg({ type: DeletePostInput }) },
     resolve: async (parent, { input }, { session }) => {
-      return await deletePost(input, session)
+      return await deleteHighlight(input, session)
     }
   })
 )

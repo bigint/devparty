@@ -28,13 +28,13 @@ const PostType: React.FC = () => {
   const router = useRouter()
   const [attachments, setAttachments] = useState<string[]>([])
   const [selectedProduct, setSelectedProduct] = useState<string>('')
-  const [createPost, createPostResult] = useMutation<
+  const [createHighlight, createHighlightResult] = useMutation<
     NewPostMutation,
     NewPostMutationVariables
   >(
     gql`
       mutation NewPostMutation($input: CreatePostInput!) {
-        createPost(input: $input) {
+        createHighlight(input: $input) {
           id
           body
         }
@@ -45,7 +45,7 @@ const PostType: React.FC = () => {
         setAttachments([])
         form.reset()
         toast.success('Post has been created successfully!')
-        router.push(`/highlights/${data?.createPost?.id}`)
+        router.push(`/highlights/${data?.createHighlight?.id}`)
       }
     }
   )
@@ -59,7 +59,7 @@ const PostType: React.FC = () => {
       form={form}
       className="space-y-1"
       onSubmit={({ body }) =>
-        createPost({
+        createHighlight({
           variables: {
             input: {
               body,
@@ -72,7 +72,7 @@ const PostType: React.FC = () => {
         })
       }
     >
-      <ErrorMessage error={createPostResult.error} className="mb-1" />
+      <ErrorMessage error={createHighlightResult.error} className="mb-1" />
       <TextArea {...form.register('body')} placeholder="What's on your mind?" />
       <div className="flex items-center justify-between">
         <div className="flex space-x-2">

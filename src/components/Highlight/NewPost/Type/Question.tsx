@@ -40,13 +40,13 @@ const QuestionType: React.FC = () => {
   const [attachments, setAttachments] = useState<string[]>([])
   const [selectedProduct, setSelectedProduct] = useState<string>('')
   const [preview, setPreview] = useState<boolean>(false)
-  const [createPost, createPostResult] = useMutation<
+  const [createHighlight, createHighlightResult] = useMutation<
     NewPostMutation,
     NewPostMutationVariables
   >(
     gql`
       mutation NewPostMutation($input: CreatePostInput!) {
-        createPost(input: $input) {
+        createHighlight(input: $input) {
           id
           body
         }
@@ -57,7 +57,7 @@ const QuestionType: React.FC = () => {
         setAttachments([])
         form.reset()
         toast.success('Question has been created successfully!')
-        router.push(`/highlights/${data?.createPost?.id}`)
+        router.push(`/highlights/${data?.createHighlight?.id}`)
       }
     }
   )
@@ -71,7 +71,7 @@ const QuestionType: React.FC = () => {
       form={form}
       className="space-y-1"
       onSubmit={({ title, body }) =>
-        createPost({
+        createHighlight({
           variables: {
             input: {
               title,
@@ -87,7 +87,7 @@ const QuestionType: React.FC = () => {
     >
       <ErrorMessage
         title="Failed to create question"
-        error={createPostResult.error}
+        error={createHighlightResult.error}
       />
       {preview ? (
         <div className="text-xl post">

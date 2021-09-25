@@ -30,13 +30,13 @@ const TaskType: React.FC = () => {
   const router = useRouter()
   const [attachments, setAttachments] = useState<string[]>([])
   const [selectedProduct, setSelectedProduct] = useState<string>('')
-  const [createPost, createPostResult] = useMutation<
+  const [createHighlight, createHighlightResult] = useMutation<
     NewPostMutation,
     NewPostMutationVariables
   >(
     gql`
       mutation NewPostMutation($input: CreatePostInput!) {
-        createPost(input: $input) {
+        createHighlight(input: $input) {
           id
           body
         }
@@ -47,7 +47,7 @@ const TaskType: React.FC = () => {
         setAttachments([])
         form.reset()
         toast.success('Task has been created successfully!')
-        router.push(`/highlights/${data?.createPost?.id}`)
+        router.push(`/highlights/${data?.createHighlight?.id}`)
       }
     }
   )
@@ -61,7 +61,7 @@ const TaskType: React.FC = () => {
       form={form}
       className="space-y-1"
       onSubmit={({ body, done }) =>
-        createPost({
+        createHighlight({
           variables: {
             input: {
               body,
@@ -77,7 +77,7 @@ const TaskType: React.FC = () => {
     >
       <ErrorMessage
         title="Failed to create task"
-        error={createPostResult.error}
+        error={createHighlightResult.error}
       />
       <div className="flex items-center mb-1.5 gap-2.5">
         <TaskCheckbox {...form.register('done')} />
