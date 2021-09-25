@@ -9,7 +9,7 @@ interface Props {
   notification: Notification
 }
 
-const PostReply: React.FC<Props> = ({ notification }) => {
+const HighlightReply: React.FC<Props> = ({ notification }) => {
   return (
     <Card>
       <CardBody className="space-y-3">
@@ -30,4 +30,4 @@ const PostReply: React.FC<Props> = ({ notification }) => {
   )
 }
 
-export default PostReply
+export default HighlightReply
