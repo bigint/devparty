@@ -14,7 +14,7 @@ const USER_FEED_QUERY = gql`
   query UserFeedQuery($after: String, $username: String!) {
     user(username: $username) {
       id
-      posts(first: 10, after: $after) {
+      highlights(first: 10, after: $after) {
         totalCount
         pageInfo {
           endCursor
@@ -49,8 +49,8 @@ const UserFeed: React.FC<Props> = ({ feedType }) => {
     }
   )
 
-  const posts = data?.user?.posts?.edges?.map((edge) => edge?.node)
-  const pageInfo = data?.user?.posts?.pageInfo
+  const highlights = data?.user?.highlights?.edges?.map((edge) => edge?.node)
+  const pageInfo = data?.user?.highlights?.pageInfo
 
   const { observe } = useInView({
     threshold: 1,
@@ -73,9 +73,9 @@ const UserFeed: React.FC<Props> = ({ feedType }) => {
 
   return (
     <>
-      <ErrorMessage title="Failed to load posts" error={error} />
+      <ErrorMessage title="Failed to load highlights" error={error} />
       <div className="space-y-3">
-        {data?.user?.posts?.totalCount === 0 ? (
+        {data?.user?.highlights?.totalCount === 0 ? (
           <EmptyState
             message={
               <div>
@@ -86,7 +86,7 @@ const UserFeed: React.FC<Props> = ({ feedType }) => {
             icon={<CollectionIcon className="h-8 w-8" />}
           />
         ) : (
-          posts?.map((post: any) => (
+          highlights?.map((post: any) => (
             <SinglePost key={post?.id} post={post} showParent />
           ))
         )}

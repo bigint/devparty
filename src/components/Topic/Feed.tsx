@@ -13,7 +13,7 @@ export const TOPIC_FEED_QUERY = gql`
   query TopicFeedQuery($after: String, $name: String!) {
     topic(name: $name) {
       id
-      posts(first: 10, after: $after) {
+      highlights(first: 10, after: $after) {
         pageInfo {
           endCursor
           hasNextPage
@@ -44,8 +44,8 @@ const TopicFeed: React.FC<Props> = ({ topic }) => {
       skip: !topic
     }
   )
-  const posts = data?.topic?.posts?.edges?.map((edge) => edge?.node)
-  const pageInfo = data?.topic?.posts?.pageInfo
+  const highlights = data?.topic?.highlights?.edges?.map((edge) => edge?.node)
+  const pageInfo = data?.topic?.highlights?.pageInfo
 
   const { observe } = useInView({
     threshold: 1,
@@ -68,15 +68,15 @@ const TopicFeed: React.FC<Props> = ({ topic }) => {
 
   return (
     <div>
-      <ErrorMessage title="Failed to load posts" error={error} />
+      <ErrorMessage title="Failed to load highlights" error={error} />
       <div className="space-y-3">
-        {posts?.length === 0 ? (
+        {highlights?.length === 0 ? (
           <EmptyState
-            message="No posts found, follow some users!"
+            message="No highlights found, follow some users!"
             icon={<CollectionIcon className="h-8 w-8" />}
           />
         ) : (
-          posts?.map((post: any) => (
+          highlights?.map((post: any) => (
             <SinglePost key={post?.id} post={post} showParent />
           ))
         )}

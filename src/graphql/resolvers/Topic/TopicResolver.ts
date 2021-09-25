@@ -19,11 +19,11 @@ builder.prismaObject('Topic', {
         return await hasStarred(session?.userId as string, parent.id)
       }
     }),
-    postsCount: t.relationCount('posts'),
+    highlightsCount: t.relationCount('highlights'),
 
     // Relations
     starrers: t.relatedConnection('starrers', { cursor: 'id' }),
-    posts: t.prismaConnection({
+    highlights: t.prismaConnection({
       type: 'Post',
       cursor: 'id',
       defaultSize: 20,

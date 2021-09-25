@@ -4,7 +4,7 @@ import { db } from '@utils/prisma'
 export class Stats {
   users: number
   products: number
-  posts: number
+  highlights: number
   likes: number
   topics: number
   badges: number
@@ -14,7 +14,7 @@ export class Stats {
   constructor(
     users: number,
     products: number,
-    posts: number,
+    highlights: number,
     likes: number,
     topics: number,
     badges: number,
@@ -23,7 +23,7 @@ export class Stats {
   ) {
     this.users = users
     this.products = products
-    this.posts = posts
+    this.highlights = highlights
     this.likes = likes
     this.topics = topics
     this.badges = badges
@@ -36,7 +36,7 @@ export const StatsObject = builder.objectRef<Stats>('Stats').implement({
   fields: (t) => ({
     users: t.exposeInt('users'),
     products: t.exposeInt('products'),
-    posts: t.exposeInt('posts'),
+    highlights: t.exposeInt('highlights'),
     likes: t.exposeInt('likes'),
     topics: t.exposeInt('topics'),
     badges: t.exposeInt('badges'),
@@ -53,7 +53,7 @@ builder.queryField('stats', (t) =>
     resolve: async () => {
       const users = await db.user.count()
       const products = await db.product.count()
-      const posts = await db.post.count()
+      const highlights = await db.post.count()
       const likes = await db.like.count()
       const topics = await db.topic.count()
       const badges = await db.badge.count()
@@ -63,7 +63,7 @@ builder.queryField('stats', (t) =>
       return new Stats(
         users,
         products,
-        posts,
+        highlights,
         likes,
         topics,
         badges,
