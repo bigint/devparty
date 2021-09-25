@@ -2,7 +2,7 @@ import { hasLiked } from '@graphql/resolvers/Like/queries/hasLiked'
 import { createNotification } from '@graphql/resolvers/Notification/mutations/createNotification'
 import { db } from '@utils/prisma'
 
-export const togglePostLike = async (
+export const toggleHighlightLike = async (
   query: any,
   userId: string,
   postId: string

@@ -91,13 +91,13 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
   const router = useRouter()
   const { currentUser } = useContext(AppContext)
   const { oembed, isLoading, isError } = useOembed(post?.oembedUrl)
-  const [togglePostLike] = useMutation<
+  const [toggleHighlightLike] = useMutation<
     TogglePostLikeMutation,
     TogglePostLikeMutationVariables
   >(
     gql`
       mutation TogglePostLikeMutation($input: TogglePostLikeInput!) {
-        togglePostLike(input: $input) {
+        toggleHighlightLike(input: $input) {
           ...PostFragment
         }
       }
@@ -111,7 +111,7 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
   )
 
   const handleLike = (post: any) => {
-    togglePostLike({
+    toggleHighlightLike({
       variables: {
         input: { id: post?.id }
       }
