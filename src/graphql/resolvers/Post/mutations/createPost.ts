@@ -78,7 +78,7 @@ export const createPost = async (
       session!.userId,
       parent?.userId,
       post?.id,
-      'POST_REPLY'
+      'HIGHLIGHT_REPLY'
     )
   }
 

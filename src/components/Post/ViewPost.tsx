@@ -18,7 +18,7 @@ import NewReply from './Reply/NewReply'
 import Replies from './Reply/Replies'
 import SinglePost, { PostFragment } from './SinglePost'
 
-export const POST_QUERY = gql`
+export const HIGHLIGHT_QUERY = gql`
   query PostQuery($id: ID!) {
     post(id: $id) {
       ...PostFragment
@@ -30,7 +30,7 @@ export const POST_QUERY = gql`
 const ViewPost: React.FC = () => {
   const router = useRouter()
   const { currentUser, staffMode } = useContext(AppContext)
-  const { data, loading, error } = useQuery<PostQuery>(POST_QUERY, {
+  const { data, loading, error } = useQuery<PostQuery>(HIGHLIGHT_QUERY, {
     variables: {
       id: router.query.postId
     },
