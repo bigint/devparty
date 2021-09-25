@@ -12,6 +12,9 @@ tasks:
       yarn prepare;
       gp sync-done setup;
     command: yarn codegen:graphql --watch
+  - name: Storybook
+    init: gp sync-await setup
+    command: yarn storybook
   - name: Prisma Studio
     init: gp sync-await setup
     command: BROWSER=none yarn prisma studio
@@ -25,6 +28,8 @@ ports:
     onOpen: open-browser
     visibility: public
   - port: 5555 # Prisma Studio
+    onOpen: notify
+  - port: 6006 # Storybook
     onOpen: notify
     visibility: public
   - port: 6379 # Redis
