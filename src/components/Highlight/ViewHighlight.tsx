@@ -13,7 +13,7 @@ import { Post, User } from 'src/__generated__/schema.generated'
 
 import { PostQuery } from './__generated__/ViewPost.generated'
 import PostMod from './Mod'
-import MorePosts from './MorePosts'
+import MorePosts from './MoreHighlights'
 import NewReply from './Reply/NewReply'
 import Replies from './Reply/Replies'
 import SinglePost, { PostFragment } from './SinglePost'
@@ -27,7 +27,7 @@ export const HIGHLIGHT_QUERY = gql`
   ${PostFragment}
 `
 
-const ViewPost: React.FC = () => {
+const ViewHighlight: React.FC = () => {
   const router = useRouter()
   const { currentUser, staffMode } = useContext(AppContext)
   const { data, loading, error } = useQuery<PostQuery>(HIGHLIGHT_QUERY, {
@@ -86,4 +86,4 @@ const ViewPost: React.FC = () => {
   )
 }
 
-export default ViewPost
+export default ViewHighlight

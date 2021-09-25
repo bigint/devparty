@@ -1,6 +1,6 @@
 import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import FeedType from '@components/Home/FeedType'
-import NewPost from '@components/Post/NewPost'
+import NewPost from '@components/Highlight/NewPost'
 import Footer from '@components/shared/Footer'
 import AppContext from '@components/utils/AppContext'
 import React, { useContext, useState } from 'react'

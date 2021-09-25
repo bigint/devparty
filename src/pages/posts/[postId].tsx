@@ -1,4 +1,4 @@
-import ViewPost, { HIGHLIGHT_QUERY as query } from '@components/Post/ViewPost'
+import ViewPost, { HIGHLIGHT_QUERY as query } from '@components/Highlight/ViewHighlight'
 import { preloadQuery } from '@utils/apollo'
 import { GetServerSidePropsContext } from 'next'
 

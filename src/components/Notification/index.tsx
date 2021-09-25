@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import { PostFragment } from '@components/Post/SinglePost'
+import { PostFragment } from '@components/Highlight/SinglePost'
 import { EmptyState } from '@components/ui/EmptyState'
 import { ErrorMessage } from '@components/ui/ErrorMessage'
 import { PageLoading } from '@components/ui/PageLoading'

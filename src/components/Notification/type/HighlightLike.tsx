@@ -1,4 +1,4 @@
-import SinglePost from '@components/Post/SinglePost'
+import SinglePost from '@components/Highlight/SinglePost'
 import UserProfile from '@components/shared/UserProfile'
 import { Card, CardBody } from '@components/ui/Card'
 import Link from 'next/link'

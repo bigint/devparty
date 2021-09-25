@@ -33,7 +33,7 @@ export const MORE_HIGHLIGHTS_BY_USER_QUERY = gql`
 interface Props {
   post: Post
 }
-const MorePostsCard = ({ title, children }: any) => {
+const MoreHighlightsCard = ({ title, children }: any) => {
   return (
     <div className="mb-4">
       <div className="mb-2 flex items-center gap-2">
@@ -47,7 +47,7 @@ const MorePostsCard = ({ title, children }: any) => {
   )
 }
 
-const MorePosts: React.FC<Props> = ({ post }) => {
+const MoreHighlights: React.FC<Props> = ({ post }) => {
   const { data, error } = useQuery<MorePostsByUserQuery>(
     MORE_HIGHLIGHTS_BY_USER_QUERY,
     {
@@ -61,7 +61,7 @@ const MorePosts: React.FC<Props> = ({ post }) => {
   const highlights = data?.morePostsByUser?.edges?.map((edge) => edge?.node)
 
   return (
-    <MorePostsCard title={post?.user?.profile?.name}>
+    <MoreHighlightsCard title={post?.user?.profile?.name}>
       <ErrorMessage title="Failed to load more highlights" error={error} />
       {highlights?.map((post: any) => (
         <div key={post?.id} className="space-y-2">
@@ -78,8 +78,8 @@ const MorePosts: React.FC<Props> = ({ post }) => {
           </div>
         </div>
       ))}
-    </MorePostsCard>
+    </MoreHighlightsCard>
   )
 }
 
-export default MorePosts
+export default MoreHighlights
