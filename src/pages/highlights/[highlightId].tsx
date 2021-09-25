@@ -7,7 +7,7 @@ export const getServerSideProps = async (
 ) => {
   return preloadQuery(context, {
     query,
-    variables: { id: context.params!.postId }
+    variables: { id: context.params!.highlightId }
   })
 }
 
