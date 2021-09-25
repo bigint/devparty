@@ -7,7 +7,7 @@ import React from 'react'
 import useInView from 'react-cool-inview'
 import { Post } from 'src/__generated__/schema.generated'
 
-import SinglePost, { PostFragment } from '../SinglePost'
+import SinglePost, { PostFragment } from '../SingleHighlight'
 import { RepliesQuery } from './__generated__/Replies.generated'
 
 export const REPLIES_QUERY = gql`

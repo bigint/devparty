@@ -16,7 +16,7 @@ import PostMod from './Mod'
 import MorePosts from './MoreHighlights'
 import NewReply from './Reply/NewReply'
 import Replies from './Reply/Replies'
-import SinglePost, { PostFragment } from './SinglePost'
+import SinglePost, { PostFragment } from './SingleHighlight'
 
 export const HIGHLIGHT_QUERY = gql`
   query PostQuery($id: ID!) {

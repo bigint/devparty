@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import SinglePost, { PostFragment } from '@components/Highlight/SinglePost'
+import SinglePost, { PostFragment } from '@components/Highlight/SingleHighlight'
 import PostsShimmer from '@components/shared/Shimmer/PostsShimmer'
 import { EmptyState } from '@components/ui/EmptyState'
 import { ErrorMessage } from '@components/ui/ErrorMessage'

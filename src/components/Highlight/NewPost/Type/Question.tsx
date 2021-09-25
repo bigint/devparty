@@ -1,5 +1,5 @@
 import { gql, useMutation } from '@apollo/client'
-import Attachments from '@components/Highlight/SinglePost/Attachments'
+import Attachments from '@components/Highlight/SingleHighlight/Attachments'
 import { Button } from '@components/ui/Button'
 import { ErrorMessage } from '@components/ui/ErrorMessage'
 import { Form, useZodForm } from '@components/ui/Form'

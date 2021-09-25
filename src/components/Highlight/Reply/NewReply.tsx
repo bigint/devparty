@@ -12,7 +12,7 @@ import { Post } from 'src/__generated__/schema.generated'
 import { object, string } from 'zod'
 
 import Attachment from '../NewPost/Attachment'
-import Attachments from '../SinglePost/Attachments'
+import Attachments from '../SingleHighlight/Attachments'
 import {
   NewReplyMutation,
   NewReplyMutationVariables
