@@ -6,13 +6,13 @@ import { hasLiked } from '../Like/queries/hasLiked'
 import { Result } from '../ResultResolver'
 import { createHighlight } from './mutations/createHighlight'
 import { deleteHighlight } from './mutations/deleteHighlight'
-import { editPost } from './mutations/editHighlight'
+import { editHighlight } from './mutations/editHighlight'
 import { exploreFeed } from './queries/exploreFeed'
 import { getMorePostsByUser } from './queries/getMorePostsByUser'
 import { homeFeed } from './queries/homeFeed'
 
-builder.prismaObject('Post', {
-  findUnique: (post) => ({ id: post.id }),
+builder.prismaObject('Highlight', {
+  findUnique: (highlight) => ({ id: highlight.id }),
   fields: (t) => ({
     id: t.exposeID('id'),
     title: t.exposeString('title', { nullable: true }),
@@ -65,7 +65,7 @@ builder.prismaObject('Post', {
 
 builder.queryField('morePostsByUser', (t) =>
   t.prismaConnection({
-    type: 'Post',
+    type: 'Highlight',
     cursor: 'id',
     args: {
       userId: t.arg.id(),
@@ -79,7 +79,7 @@ builder.queryField('morePostsByUser', (t) =>
 
 builder.queryField('homeFeed', (t) =>
   t.prismaConnection({
-    type: 'Post',
+    type: 'Highlight',
     cursor: 'id',
     defaultSize: 20,
     maxSize: 100,
@@ -92,7 +92,7 @@ builder.queryField('homeFeed', (t) =>
 
 builder.queryField('exploreFeed', (t) =>
   t.prismaConnection({
-    type: 'Post',
+    type: 'Highlight',
     cursor: 'id',
     defaultSize: 20,
     maxSize: 100,
@@ -104,7 +104,7 @@ builder.queryField('exploreFeed', (t) =>
 
 builder.queryField('post', (t) =>
   t.prismaField({
-    type: 'Post',
+    type: 'Highlight',
     args: { id: t.arg.id() },
     resolve: async (query, parent, { id }) => {
       return await db.highlight.findFirst({
@@ -133,7 +133,7 @@ const CreatePostInput = builder.inputType('CreatePostInput', {
 
 builder.mutationField('createHighlight', (t) =>
   t.prismaField({
-    type: 'Post',
+    type: 'Highlight',
     args: { input: t.arg({ type: CreatePostInput }) },
     resolve: async (query, parent, { input }, { session }) => {
       return await createHighlight(query, input, session)
@@ -149,12 +149,12 @@ const EditPostInput = builder.inputType('EditPostInput', {
   })
 })
 
-builder.mutationField('editPost', (t) =>
+builder.mutationField('editHighlight', (t) =>
   t.prismaField({
-    type: 'Post',
+    type: 'Highlight',
     args: { input: t.arg({ type: EditPostInput }) },
     resolve: async (query, parent, { input }, { session }) => {
-      return await editPost(query, input, session)
+      return await editHighlight(query, input, session)
     }
   })
 )

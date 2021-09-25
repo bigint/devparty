@@ -2,7 +2,7 @@ import { Session } from '@prisma/client'
 import { db } from '@utils/prisma'
 import { EditPostInput } from 'src/__generated__/schema.generated'
 
-export const editPost = async (
+export const editHighlight = async (
   query: any,
   input: EditPostInput | null | undefined,
   session: Session | null | undefined

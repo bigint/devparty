@@ -21,13 +21,13 @@ interface Props {
 }
 
 const TaskType: React.FC<Props> = ({ task }) => {
-  const [editPost, { loading }] = useMutation<
+  const [editHighlight, { loading }] = useMutation<
     EditPostMutation,
     EditPostMutationVariables
   >(
     gql`
       mutation EditPostMutation($input: EditPostInput!) {
-        editPost(input: $input) {
+        editHighlight(input: $input) {
           id
           body
           done
@@ -45,7 +45,7 @@ const TaskType: React.FC<Props> = ({ task }) => {
   )
 
   const toggleTaskStatus = () => {
-    editPost({ variables: { input: { id: task?.id, done: !task?.done } } })
+    editHighlight({ variables: { input: { id: task?.id, done: !task?.done } } })
   }
 
   return (
