@@ -32,7 +32,7 @@ const ViewHighlight: React.FC = () => {
   const { currentUser, staffMode } = useContext(AppContext)
   const { data, loading, error } = useQuery<PostQuery>(HIGHLIGHT_QUERY, {
     variables: {
-      id: router.query.postId
+      id: router.query.highlightId
     },
     skip: !router.isReady
   })

@@ -123,7 +123,7 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
       <CardBody className="space-y-4">
         {!post?.parent &&
           post?.type === 'REPLY' &&
-          router.pathname === '/highlights/[postId]' && (
+          router.pathname === '/highlights/[highlightId]' && (
             <div className="text-sm text-gray-500 dark:text-gray-400">
               Post author deleted the parent post
             </div>
