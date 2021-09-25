@@ -5,33 +5,38 @@ import { db } from '@utils/prisma'
 export const toggleHighlightLike = async (
   query: any,
   userId: string,
-  postId: string
+  highlightId: string
 ) => {
   try {
     let like
-    if (await hasLiked(userId, postId)) {
+    if (await hasLiked(userId, highlightId)) {
       await db.like.deleteMany({
-        where: { userId, postId }
+        where: { userId, highlightId }
       })
     } else {
       like = await db.like.create({
         data: {
-          post: { connect: { id: postId } },
+          highlight: { connect: { id: highlightId } },
           user: { connect: { id: userId } }
         }
       })
     }
 
-    const post = await db.highlight.findFirst({
+    const highlight = await db.highlight.findFirst({
       ...query,
-      where: { id: postId }
+      where: { id: highlightId }
     })
 
-    if (like && userId !== post?.userId) {
-      await createNotification(userId, post?.userId, like?.id, 'HIGHLIGHT_LIKE')
+    if (like && userId !== highlight?.userId) {
+      await createNotification(
+        userId,
+        highlight?.userId,
+        like?.id,
+        'HIGHLIGHT_LIKE'
+      )
     }
 
-    return post
+    return highlight
   } catch (error) {
     throw new Error('Something went wrong!')
   }
