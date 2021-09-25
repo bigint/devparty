@@ -76,7 +76,7 @@ CREATE TABLE `tips` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `posts` (
+CREATE TABLE `highlights` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191),
     `body` TEXT NOT NULL,
@@ -94,9 +94,9 @@ CREATE TABLE `posts` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `post_topics` (
+CREATE TABLE `highlight_topics` (
     `id` VARCHAR(191) NOT NULL,
-    `postId` VARCHAR(191),
+    `highlightId` VARCHAR(191),
     `topicId` VARCHAR(191),
 
     PRIMARY KEY (`id`)
@@ -119,9 +119,9 @@ CREATE TABLE `likes` (
     `id` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `userId` VARCHAR(191) NOT NULL,
-    `postId` VARCHAR(191),
+    `highlightId` VARCHAR(191),
 
-    UNIQUE INDEX `likes_userId_postId_key`(`userId`, `postId`),
+    UNIQUE INDEX `likes_userId_highlightId_key`(`userId`, `highlightId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -162,7 +162,7 @@ CREATE TABLE `notifications` (
     `id` VARCHAR(191) NOT NULL,
     `message` VARCHAR(191),
     `isRead` BOOLEAN NOT NULL DEFAULT false,
-    `type` ENUM('POST_LIKE', 'POST_REPLY', 'USER_MENTION', 'USER_FOLLOW', 'PRODUCT_SUBSCRIBE') NOT NULL,
+    `type` ENUM('HIGHLIGHT_LIKE', 'HIGHLIGHT_REPLY', 'USER_MENTION', 'USER_FOLLOW', 'PRODUCT_SUBSCRIBE') NOT NULL,
     `entityId` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -170,7 +170,7 @@ CREATE TABLE `notifications` (
     `dispatcherId` VARCHAR(191) NOT NULL,
     `likeId` VARCHAR(191),
     `productId` VARCHAR(191),
-    `postId` VARCHAR(191),
+    `highlightId` VARCHAR(191),
 
     UNIQUE INDEX `notifications_entityId_key`(`entityId`),
     PRIMARY KEY (`id`)
@@ -192,7 +192,7 @@ CREATE TABLE `integrations` (
 -- CreateTable
 CREATE TABLE `logs` (
     `id` VARCHAR(191) NOT NULL,
-    `action` ENUM('POST_LIKE') NOT NULL,
+    `action` ENUM('HIGHLIGHT_LIKE') NOT NULL,
     `entityId` VARCHAR(191),
     `ipAddress` VARCHAR(191),
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
