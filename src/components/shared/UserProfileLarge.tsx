@@ -33,7 +33,7 @@ const UserProfileLarge: React.FC<Props> = ({ user, showFollow = false }) => {
                   <div>{user?.profile?.name}</div>
                   {user?.isVerified && (
                     <Tooltip content={'Verified'}>
-                      <BadgeCheckIcon className="h-4 w-4 text-brand-500" />
+                      <BadgeCheckIcon className="h-4 w-4 text-brand-500 dark:text-brand-400" />
                     </Tooltip>
                   )}
                 </a>
