@@ -52,6 +52,11 @@ interface GraphQLRequest {
 const handler: NextApiHandler = async (req, res) => {
   const session = await resolveSession({ req, res })
 
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
+
   try {
     const request: GraphQLRequest = {
       headers: req.headers,
