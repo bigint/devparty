@@ -50,7 +50,7 @@ const Details: React.FC<Props> = ({ user }) => {
             {user?.profile?.name}
             {user?.isVerified && (
               <Tooltip content={'Verified'}>
-                <BadgeCheckIcon className="h-6 w-6 text-brand-500" />
+                <BadgeCheckIcon className="h-6 w-6 text-purple-500" />
               </Tooltip>
             )}
             {user?.isStaff && (

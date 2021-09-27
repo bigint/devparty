@@ -17,8 +17,8 @@ body {
 
 .linkify a,
 .prose a {
-  @apply text-brand-500;
-  @apply hover:text-brand-600;
+  @apply text-purple-500;
+  @apply hover:text-purple-600;
 }
 
 .tooltip {

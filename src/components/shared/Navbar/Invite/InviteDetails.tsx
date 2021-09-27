@@ -57,7 +57,7 @@ const InviteDetails: React.FC = () => {
 
   return (
     <>
-      <div className="bg-brand-300 py-2">
+      <div className="bg-purple-300 py-2">
         <img
           className="object-cover h-60 w-60 mx-auto"
           src="https://assets.devparty.io/images/illustrations/invite.png"

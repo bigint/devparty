@@ -45,7 +45,7 @@ const MarkAsRead: React.FC<Props> = ({ notification }) => {
         {markingAsRead ? (
           <Spinner size="xs" className="ml-1" />
         ) : (
-          <CheckCircleIcon className="h-5 w-5 text-brand-500" />
+          <CheckCircleIcon className="h-5 w-5 text-purple-500" />
         )}
       </Tooltip>
     </button>

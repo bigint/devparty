@@ -19,8 +19,8 @@ const Menu: React.FC<MenuProps> = ({ children, current, url }) => (
   <Link href={url} passHref>
     <a
       className={clsx(
-        'flex items-center space-x-2 rounded-lg px-3 py-2 hover:bg-brand-100 hover:text-brand-500 dark:hover:bg-opacity-20 dark:bg-opacity-20 hover:bg-opacity-100',
-        { 'bg-brand-100 text-brand-500 font-bold': current }
+        'flex items-center space-x-2 rounded-lg px-3 py-2 hover:bg-purple-100 hover:text-purple-500 dark:hover:bg-opacity-20 dark:bg-opacity-20 hover:bg-opacity-100',
+        { 'bg-purple-100 text-purple-500 font-bold': current }
       )}
     >
       {children}

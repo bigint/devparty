@@ -37,7 +37,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(function Button(
       ref={ref}
       className={clsx(
         {
-          'bg-brand-500 hover:bg-brand-600 border border-brand-600 text-white focus:ring-brand-400':
+          'bg-purple-500 hover:bg-purple-600 border border-purple-600 text-white focus:ring-purple-400':
             !outline && variant === 'primary',
           'bg-gray-500 hover:bg-gray-600 border border-gray-600 text-white focus:ring-gray-400':
             !outline && variant === 'secondary',
@@ -45,7 +45,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(function Button(
             !outline && variant === 'success',
           'bg-red-500 hover:bg-red-400 border border-red-600 text-white focus:ring-red-400':
             !outline && variant === 'danger',
-          'border border-brand-500 text-brand-500 hover:bg-brand-100 focus:ring-brand-400':
+          'border border-purple-500 text-purple-500 hover:bg-purple-100 focus:ring-purple-400':
             outline && variant === 'primary',
           'border border-gray-500 text-gray-500 hover:bg-gray-100 focus:ring-gray-400':
             outline && variant === 'secondary',
