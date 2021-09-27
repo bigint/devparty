@@ -5,6 +5,5 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "git.autofetch": true,
   "git.enableSmartCommit": true,
-  "workbench.iconTheme": "material-icon-theme",
   "editor.lineHeight": 30
 }
