@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
                       />
                     </a>
                   </Link>
-                  <div className="text-xs rounded-md px-1.5 py-0.5 text-white bg-gradient-to-r from-brand-500 to-pink-500">
+                  <div className="text-xs rounded-md px-1.5 py-0.5 text-white bg-gradient-to-r from-purple-500 to-pink-500">
                     beta
                   </div>
                 </div>

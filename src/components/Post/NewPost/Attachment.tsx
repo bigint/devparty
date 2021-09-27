@@ -32,7 +32,7 @@ const Attachment: React.FC<Props> = ({ attachments, setAttachments }) => {
             <Spinner size="sm" />
           ) : (
             <Tooltip content="Media">
-              <PhotographIcon className="h-5 w-5 text-brand-500" />
+              <PhotographIcon className="h-5 w-5 text-purple-500" />
             </Tooltip>
           )}
           <input

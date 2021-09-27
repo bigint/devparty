@@ -8,7 +8,7 @@ const ChooseFile: React.FC<Props> = ({ onChange }) => {
   return (
     <div className="flex items-center gap-2 text-sm">
       <label className="flex items-center gap-1 cursor-pointer">
-        <PhotographIcon className="h-5 w-5 text-brand-500" />
+        <PhotographIcon className="h-5 w-5 text-purple-500" />
         <input
           type="file"
           accept="image/*"

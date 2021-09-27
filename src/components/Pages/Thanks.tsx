@@ -44,7 +44,7 @@ const Thanks: React.FC = () => {
         description="Thank you for supporting our community 🙏"
         path="/thanks"
       />
-      <div className="flex items-center justify-center bg-brand-400 h-44 w-full">
+      <div className="flex items-center justify-center bg-purple-400 h-44 w-full">
         <div className="relative text-center">
           <div className="flex items-center space-x-2 text-3xl md:text-4xl font-semibold text-white">
             <div>Thank you!</div>
