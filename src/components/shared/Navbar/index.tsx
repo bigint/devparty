@@ -2,8 +2,11 @@ import { Button } from '@components/ui/Button'
 import AppContext from '@components/utils/AppContext'
 import { Disclosure } from '@headlessui/react'
 import {
+  HomeIcon,
+  LightningBoltIcon,
   LoginIcon,
   MenuIcon,
+  ShoppingBagIcon,
   UserAddIcon,
   XIcon
 } from '@heroicons/react/outline'
@@ -29,21 +32,26 @@ const Navbar: React.FC = () => {
     name: string
     current: boolean
     isMobile: boolean
+    icon: object
   }
 
-  const NavItem = ({ url, name, current, isMobile }: NavItemProps) => {
+  const NavItem = ({ url, name, current, isMobile, icon }: NavItemProps) => {
     return (
       <Link href={url} passHref>
         <a
-          className={clsx('px-3 py-1 rounded-md font-black cursor-pointer', {
-            block: isMobile,
-            'text-brand-600 dark:text-white bg-brand-200 dark:bg-gray-800':
-              current,
-            'text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800':
-              !current
-          })}
+          className={clsx(
+            'px-3 py-2 rounded-lg font-black cursor-pointer flex items-center justify-items-start gap-2',
+            {
+              block: isMobile,
+              'text-brand-600 dark:text-white bg-brand-200 dark:bg-gray-800':
+                current,
+              'text-gray-500 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800':
+                !current
+            }
+          )}
           aria-current={current ? 'page' : undefined}
         >
+          {icon}
           {name}
         </a>
       </Link>
@@ -64,18 +72,21 @@ const Navbar: React.FC = () => {
           name="Home"
           current={router.pathname == '/'}
           isMobile={isMobile}
+          icon={<HomeIcon className="block sm:hidden h-8 w-8" />}
         />
         <NavItem
           url="/products"
           name="Products"
           current={router.pathname == '/products'}
           isMobile={isMobile}
+          icon={<ShoppingBagIcon className="block sm:hidden h-8 w-8" />}
         />
         <NavItem
           url="/explore"
           name="Explore"
           current={router.pathname == '/explore'}
           isMobile={isMobile}
+          icon={<LightningBoltIcon className="block sm:hidden h-8 w-8" />}
         />
       </>
     )
@@ -140,6 +151,7 @@ const Navbar: React.FC = () => {
                         <Button
                           size="lg"
                           variant="primary"
+                          className="py-2"
                           icon={<UserAddIcon className="h-4 w-4" />}
                         >
                           Signup
@@ -151,6 +163,7 @@ const Navbar: React.FC = () => {
                         <Button
                           size="lg"
                           variant="success"
+                          className="py-2"
                           icon={<LoginIcon className="h-4 w-4" />}
                         >
                           Login
