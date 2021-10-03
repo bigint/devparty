@@ -21,15 +21,15 @@ tasks:
     command: yarn dev
 
 ports:
-  - port: 3000 # Web app
+  - port: 3000 # Devparty app
     onOpen: open-preview
     visibility: public
   - port: 5555 # Prisma Studio
     onOpen: ignore
     visibility: public
-  - port: 6379 # Redis
+  - port: 6379 # Redis Server
     onOpen: ignore
-  - port: 3306 # MySQL
+  - port: 3306 # MySQL Database
     onOpen: ignore
 
 vscode:
