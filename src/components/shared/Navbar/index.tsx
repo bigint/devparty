@@ -5,7 +5,7 @@ import {
   HomeIcon,
   LightningBoltIcon,
   LoginIcon,
-  MenuIcon,
+  MenuAlt4Icon,
   ShoppingBagIcon,
   UserAddIcon,
   XIcon
@@ -100,17 +100,8 @@ const Navbar: React.FC = () => {
       {({ open }) => (
         <>
           {currentUser?.isStaff && staffMode && <StaffBar />}
-          <div className="container mx-auto max-w-screen-2xl px-5">
+          <div className="container mx-auto sm:max-w-screen-2xl sm:px-5">
             <div className="relative flex items-center justify-between h-16">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                <Disclosure.Button as={Button} outline>
-                  {open ? (
-                    <XIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
               <div className="flex-1 flex items-center justify-center sm:justify-between">
                 <div className="flex-shrink-0 flex items-center space-x-3">
                   <Link href={currentUser ? '/home' : '/'} passHref>
@@ -158,7 +149,7 @@ const Navbar: React.FC = () => {
                         </Button>
                       </Link>
                     </div>
-                    <div>
+                    <div className="hidden sm:block">
                       <Link href="/login" passHref>
                         <Button
                           size="lg"
@@ -172,12 +163,52 @@ const Navbar: React.FC = () => {
                     </div>
                   </div>
                 )}
+                <div className="flex items-center sm:hidden">
+                  <Disclosure.Button
+                    className="border-none outline-none ring-opacity-0 focus:border-none focus:outline-none focus:ring-opacity-0 hover:bg-transparent focus:bg-transparent"
+                    as={Button}
+                    outline
+                  >
+                    {open ? (
+                      <XIcon className="block h-6 w-6" aria-hidden="true" />
+                    ) : (
+                      <MenuAlt4Icon
+                        className="block h-6 w-6"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </Disclosure.Button>
+                </div>
               </div>
             </div>
           </div>
           <Disclosure.Panel className="sm:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+            <div className="px-2 pt-1 pb-2 space-y-1">
+              <Search />
+            </div>
+            <div className="px-2 pt-1 pb-2 space-y-1">
               <NavItems isMobile />
+            </div>
+            <div className="px-2 pt-1 pb-3 flex items-center justify-start gap-x-3">
+              <Link href="/login" passHref>
+                <Button
+                  className="h-12 w-full flex justify-center"
+                  size="lg"
+                  icon={<LoginIcon className="h-6 w-6" />}
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link href="/signup" passHref>
+                <Button
+                  className="h-12 w-full flex justify-center"
+                  variant="success"
+                  size="lg"
+                  icon={<UserAddIcon className="h-6 w-6" />}
+                >
+                  Signup
+                </Button>
+              </Link>
             </div>
           </Disclosure.Panel>
         </>

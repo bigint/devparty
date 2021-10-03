@@ -73,14 +73,14 @@ const Search: React.FC = () => {
   }
 
   return (
-    <div className="h-10 w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus-within:ring-1  focus-within:border-brand-500 focus-within:ring-brand-400 outline-none rounded-lg shadow-sm flex items-center justify-evenly p-1">
+    <div className="h-12 sm:h-10 w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus-within:ring-1  focus-within:border-brand-500 focus-within:ring-brand-400 outline-none rounded-lg shadow-sm flex items-center justify-evenly p-1">
       <input
-        className="outline-none border-none focus:ring-0 rounded-lg m-auto px-2 py-0"
+        className="outline-none border-none focus:ring-0 rounded-lg m-auto px-2 py-0 w-full"
         type="text"
         placeholder="Search Devparty..."
         onChange={handleSearch}
       />
-      <Button variant="primary" className="h-8 w-8 px-1.5">
+      <Button variant="primary" className="h-10 w-11 sm:h-8 sm:w-9 px-1.5">
         <SearchIcon className="h-full w-full" />
       </Button>
     </div>
