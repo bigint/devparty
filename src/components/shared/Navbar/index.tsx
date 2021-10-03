@@ -1,7 +1,12 @@
 import { Button } from '@components/ui/Button'
 import AppContext from '@components/utils/AppContext'
 import { Disclosure } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import {
+  LoginIcon,
+  MenuIcon,
+  UserAddIcon,
+  XIcon
+} from '@heroicons/react/outline'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -32,7 +37,8 @@ const Navbar: React.FC = () => {
         <a
           className={clsx('px-3 py-1 rounded-md font-black cursor-pointer', {
             block: isMobile,
-            'text-black dark:text-white bg-gray-200 dark:bg-gray-800': current,
+            'text-brand-600 dark:text-white bg-brand-200 dark:bg-gray-800':
+              current,
             'text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800':
               !current
           })}
@@ -56,7 +62,7 @@ const Navbar: React.FC = () => {
         <NavItem
           url={currentUser ? '/home' : '/'}
           name="Home"
-          current={router.pathname == '/home'}
+          current={router.pathname == '/'}
           isMobile={isMobile}
         />
         <NavItem
@@ -94,7 +100,7 @@ const Navbar: React.FC = () => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex-1 flex items-center justify-center sm:justify-start">
+              <div className="flex-1 flex items-center justify-center sm:justify-between">
                 <div className="flex-shrink-0 flex items-center space-x-3">
                   <Link href={currentUser ? '/home' : '/'} passHref>
                     <a>
@@ -131,14 +137,22 @@ const Navbar: React.FC = () => {
                   <div className="space-x-4 flex">
                     <div className="hidden sm:block">
                       <Link href="/signup" passHref>
-                        <Button size="lg" variant="primary">
+                        <Button
+                          size="lg"
+                          variant="primary"
+                          icon={<UserAddIcon className="h-4 w-4" />}
+                        >
                           Signup
                         </Button>
                       </Link>
                     </div>
                     <div>
                       <Link href="/login" passHref>
-                        <Button size="lg" variant="success">
+                        <Button
+                          size="lg"
+                          variant="success"
+                          icon={<LoginIcon className="h-4 w-4" />}
+                        >
                           Login
                         </Button>
                       </Link>
