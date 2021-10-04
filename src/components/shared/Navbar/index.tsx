@@ -117,10 +117,10 @@ const Navbar: React.FC = () => {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex items-center space-x-4">
+                    <NavItems />
                     <div className="hidden md:block">
                       <Search />
                     </div>
-                    <NavItems />
                   </div>
                 </div>
               </div>
