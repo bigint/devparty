@@ -19,13 +19,15 @@ export default function NFTType() {
     const { name, description, price } = formInput
     if (!name || !description || !price) return
     try {
-      createSale('https://yogi.codes')
+      mintNFT(
+        'https://mumbai.polygonscan.com/address/0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3'
+      )
     } catch (error) {
       console.log('Error uploading file: ', error)
     }
   }
 
-  async function createSale(url: string) {
+  async function mintNFT(url: string) {
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
@@ -34,6 +36,7 @@ export default function NFTType() {
     let contract = new ethers.Contract(nftaddress, NFT.abi, signer)
     let transaction = await contract.createToken(url)
     let tx = await transaction.wait()
+    console.log(tx)
     let event = tx.events[0]
     let value = event.args[2]
     let tokenId = value.toNumber()
