@@ -1,6 +1,7 @@
+import { Button } from '@components/ui/Button'
 import { ethers } from 'ethers'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import Web3Modal from 'web3modal'
 
 import Market from '../../../../../artifacts/contracts/Market.sol/NFTMarket.json'
@@ -13,7 +14,6 @@ export default function NFTType() {
     name: '',
     description: ''
   })
-  const router = useRouter()
 
   async function createMarket() {
     const { name, description, price } = formInput
@@ -31,7 +31,6 @@ export default function NFTType() {
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
 
-    /* next, create the item */
     let contract = new ethers.Contract(nftaddress, NFT.abi, signer)
     let transaction = await contract.createToken(url)
     let tx = await transaction.wait()
@@ -41,7 +40,6 @@ export default function NFTType() {
 
     const price = ethers.utils.parseUnits(formInput.price, 'ether')
 
-    /* then list the item for sale on the marketplace */
     contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
     let listingPrice = await contract.getListingPrice()
     listingPrice = listingPrice.toString()
@@ -50,40 +48,31 @@ export default function NFTType() {
       value: listingPrice
     })
     await transaction.wait()
-    router.push('/')
+    toast.success('NFT has been posted successfully')
   }
 
   return (
-    <div className="flex justify-center">
-      <div className="w-1/2 flex flex-col pb-12">
-        <input
-          placeholder="Asset Name"
-          className="mt-8 border rounded p-4"
-          onChange={(e) =>
-            updateFormInput({ ...formInput, name: e.target.value })
-          }
-        />
-        <textarea
-          placeholder="Asset Description"
-          className="mt-2 border rounded p-4"
-          onChange={(e) =>
-            updateFormInput({ ...formInput, description: e.target.value })
-          }
-        />
-        <input
-          placeholder="Asset Price in Eth"
-          className="mt-2 border rounded p-4"
-          onChange={(e) =>
-            updateFormInput({ ...formInput, price: e.target.value })
-          }
-        />
-        <button
-          onClick={createMarket}
-          className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg"
-        >
-          Create Digital Asset
-        </button>
-      </div>
+    <div>
+      <input
+        placeholder="Asset Name"
+        onChange={(e) =>
+          updateFormInput({ ...formInput, name: e.target.value })
+        }
+      />
+      <textarea
+        placeholder="Asset Description"
+        onChange={(e) =>
+          updateFormInput({ ...formInput, description: e.target.value })
+        }
+      />
+      <input
+        placeholder="Asset Price in Eth"
+        className="mt-2 border rounded p-4"
+        onChange={(e) =>
+          updateFormInput({ ...formInput, price: e.target.value })
+        }
+      />
+      <Button onClick={createMarket}>Post NFT</Button>
     </div>
   )
 }
