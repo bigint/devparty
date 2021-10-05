@@ -69,7 +69,7 @@ const QuestionType: React.FC = () => {
   return (
     <Form
       form={form}
-      className="space-y-1"
+      className="space-y-2"
       onSubmit={({ title, body }) =>
         createQuestion({
           variables: {
@@ -99,17 +99,20 @@ const QuestionType: React.FC = () => {
           </div>
         </div>
       ) : (
-        <>
-          <Input
-            {...form.register('title')}
-            className="mb-2"
-            placeholder="What's the thing?"
-          />
-          <TextArea
-            {...form.register('body')}
-            placeholder="Ask anything about code"
-          />
-        </>
+        <div className="space-y-2">
+          <div>
+            <Input
+              {...form.register('title')}
+              placeholder="What's the thing?"
+            />
+          </div>
+          <div>
+            <TextArea
+              {...form.register('body')}
+              placeholder="Ask anything about code"
+            />
+          </div>
+        </div>
       )}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">

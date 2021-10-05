@@ -60,7 +60,7 @@ const CommitType: React.FC = () => {
   return (
     <Form
       form={form}
-      className="space-y-1"
+      className="space-y-2"
       onSubmit={({ url }) =>
         createCommit({
           variables: {
@@ -77,7 +77,7 @@ const CommitType: React.FC = () => {
         title="Failed to create commit"
         error={createCommitResult.error}
       />
-      <div className="flex items-center mb-1.5 gap-2.5">
+      <div className="flex items-center gap-2.5">
         <Input {...form.register('url')} placeholder="Git Commit URL" />
       </div>
       <div className="flex items-center justify-between">

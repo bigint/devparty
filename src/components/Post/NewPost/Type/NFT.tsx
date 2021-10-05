@@ -1,12 +1,29 @@
 import { Button } from '@components/ui/Button'
+import { Form, useZodForm } from '@components/ui/Form'
+import { Input } from '@components/ui/Input'
+import { TextArea } from '@components/ui/TextArea'
+import { CurrencyDollarIcon } from '@heroicons/react/outline'
 import { ethers } from 'ethers'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import Web3Modal from 'web3modal'
+import { number, object, string } from 'zod'
 
 import Market from '../../../../../artifacts/contracts/Market.sol/NFTMarket.json'
 import NFT from '../../../../../artifacts/contracts/NFT.sol/NFT.json'
 import { nftaddress, nftmarketaddress } from '../../../../../config'
+
+const newNFTSchema = object({
+  title: string()
+    .min(1, { message: '🖼 NFT title should not be empty' })
+    .max(190, { message: '🖼 NFT title should not exceed 10000 characters' }),
+  body: string()
+    .min(1, { message: '🖼 NFT description should not be empty' })
+    .max(10000, {
+      message: '🖼 NFT description should not exceed 10000 characters'
+    }),
+  price: number().default(0)
+})
 
 export default function NFTType() {
   const [formInput, updateFormInput] = useState({
@@ -54,28 +71,24 @@ export default function NFTType() {
     toast.success('NFT has been posted successfully')
   }
 
+  const form = useZodForm({
+    schema: newNFTSchema
+  })
+
   return (
-    <div>
-      <input
-        placeholder="Asset Name"
-        onChange={(e) =>
-          updateFormInput({ ...formInput, name: e.target.value })
-        }
-      />
-      <textarea
+    <Form form={form} className="space-y-2" onSubmit={() => alert('WIP')}>
+      <Input placeholder="Asset Name" {...form.register('title')} />
+      <TextArea
         placeholder="Asset Description"
-        onChange={(e) =>
-          updateFormInput({ ...formInput, description: e.target.value })
-        }
+        {...form.register('description')}
       />
-      <input
-        placeholder="Asset Price in Eth"
-        className="mt-2 border rounded p-4"
-        onChange={(e) =>
-          updateFormInput({ ...formInput, price: e.target.value })
-        }
+      <Input
+        prefix={<CurrencyDollarIcon className="h-5 w-5" />}
+        type="number"
+        placeholder="Price in ETH"
+        {...form.register('price')}
       />
       <Button onClick={createMarket}>Post NFT</Button>
-    </div>
+    </Form>
   )
 }

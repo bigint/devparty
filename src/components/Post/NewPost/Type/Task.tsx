@@ -59,7 +59,7 @@ const TaskType: React.FC = () => {
   return (
     <Form
       form={form}
-      className="space-y-1"
+      className="space-y-2"
       onSubmit={({ body, done }) =>
         createTask({
           variables: {
@@ -79,7 +79,7 @@ const TaskType: React.FC = () => {
         title="Failed to create task"
         error={createTaskResult.error}
       />
-      <div className="flex items-center mb-1.5 gap-2.5">
+      <div className="flex items-center gap-2.5">
         <TaskCheckbox {...form.register('done')} />
         <Input
           {...form.register('body')}

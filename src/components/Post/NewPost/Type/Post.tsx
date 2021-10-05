@@ -57,7 +57,7 @@ const PostType: React.FC = () => {
   return (
     <Form
       form={form}
-      className="space-y-1"
+      className="space-y-2"
       onSubmit={({ body }) =>
         createPost({
           variables: {

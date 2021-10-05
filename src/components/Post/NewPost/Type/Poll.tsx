@@ -91,7 +91,7 @@ const PollType: React.FC = () => {
   return (
     <Form
       form={form}
-      className="space-y-1"
+      className="space-y-2"
       onSubmit={({ body }) => {
         if (calculateError()) return false
         createPoll({
@@ -110,7 +110,7 @@ const PollType: React.FC = () => {
         title="Failed to create poll"
         error={createPollResult.error}
       />
-      <div className="mb-1.5 space-y-3">
+      <div className="space-y-3">
         <TextArea
           {...form.register('body')}
           placeholder="Tell as about your poll"
