@@ -102,7 +102,7 @@ const Navbar: React.FC = () => {
           {currentUser?.isStaff && staffMode && <StaffBar />}
           <div className="container mx-auto sm:max-w-screen-2xl sm:px-5">
             <div className="relative flex items-center justify-between h-16">
-              <div className="flex-1 flex items-center justify-center sm:justify-between">
+              <div className="flex-1 flex items-center justify-center sm:justify-start">
                 <div className="flex-shrink-0 flex items-center space-x-3">
                   <Link href={currentUser ? '/home' : '/'} passHref>
                     <a>
@@ -117,10 +117,10 @@ const Navbar: React.FC = () => {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex items-center space-x-4">
-                    <NavItems />
                     <div className="hidden md:block">
                       <Search />
                     </div>
+                    <NavItems />
                   </div>
                 </div>
               </div>
