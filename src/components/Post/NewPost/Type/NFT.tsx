@@ -4,7 +4,6 @@ import { Input } from '@components/ui/Input'
 import { TextArea } from '@components/ui/TextArea'
 import { CurrencyDollarIcon } from '@heroicons/react/outline'
 import { ethers } from 'ethers'
-import { useState } from 'react'
 import toast from 'react-hot-toast'
 import Web3Modal from 'web3modal'
 import { number, object, string } from 'zod'
@@ -26,22 +25,14 @@ const newNFTSchema = object({
 })
 
 export default function NFTType() {
-  const [formInput, updateFormInput] = useState({
-    price: '',
-    name: '',
-    description: ''
+  const form = useZodForm({
+    schema: newNFTSchema
   })
 
   async function createMarket() {
-    const { name, description, price } = formInput
-    if (!name || !description || !price) return
-    try {
-      mintNFT(
-        'https://mumbai.polygonscan.com/address/0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3'
-      )
-    } catch (error) {
-      console.log('Error uploading file: ', error)
-    }
+    mintNFT(
+      'https://mumbai.polygonscan.com/address/0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3'
+    )
   }
 
   async function mintNFT(url: string) {
@@ -53,12 +44,11 @@ export default function NFTType() {
     let contract = new ethers.Contract(nftaddress, NFT.abi, signer)
     let transaction = await contract.createToken(url)
     let tx = await transaction.wait()
-    console.log(tx)
     let event = tx.events[0]
     let value = event.args[2]
     let tokenId = value.toNumber()
 
-    const price = ethers.utils.parseUnits(formInput.price, 'ether')
+    const price = ethers.utils.parseUnits(form.getValues('price'), 'ether')
 
     contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
     let listingPrice = await contract.getListingPrice()
@@ -67,13 +57,10 @@ export default function NFTType() {
     transaction = await contract.createMarketItem(nftaddress, tokenId, price, {
       value: listingPrice
     })
+    console.log(transaction)
     await transaction.wait()
     toast.success('NFT has been posted successfully')
   }
-
-  const form = useZodForm({
-    schema: newNFTSchema
-  })
 
   return (
     <Form form={form} className="space-y-2" onSubmit={() => alert('WIP')}>
