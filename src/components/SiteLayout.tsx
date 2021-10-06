@@ -73,7 +73,7 @@ const SiteLayout: React.FC<Props> = ({ children }) => {
       <div className="flex flex-col min-h-screen">
         <Navbar />
         {children}
-        <MobileFooter />
+        {data?.me && <MobileFooter />}
       </div>
     </AppContext.Provider>
   )
