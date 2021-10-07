@@ -32,13 +32,13 @@ interface Props {
   feedType?: string
 }
 
-const HomeFeed: React.FC<Props> = ({ feedType }) => {
+const HomeFeed: React.FC<Props> = (props: Props) => {
   const { data, loading, error, fetchMore } = useQuery<HomeFeedQuery>(
     HOME_FEED_QUERY,
     {
       variables: {
         after: null,
-        type: feedType
+        type: props.feedType
       },
       pollInterval: POLLING_INTERVAL
     }
