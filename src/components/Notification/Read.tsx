@@ -16,7 +16,7 @@ interface Props {
   notification: Notification
 }
 
-const MarkAsRead: React.FC<Props> = ({ notification }) => {
+const MarkAsRead: React.FC<Props> = (props: Props) => {
   const [readNotification, { loading: markingAsRead }] = useMutation<
     ReadNotificationMutation,
     ReadNotificationMutationVariables
@@ -38,7 +38,9 @@ const MarkAsRead: React.FC<Props> = ({ notification }) => {
     <button
       disabled={markingAsRead}
       onClick={() =>
-        readNotification({ variables: { input: { id: notification?.id } } })
+        readNotification({
+          variables: { input: { id: props.notification?.id } }
+        })
       }
     >
       <Tooltip content="Mark as read">
