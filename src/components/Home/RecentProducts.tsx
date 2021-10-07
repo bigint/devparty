@@ -6,6 +6,7 @@ import { ErrorMessage } from '@components/ui/ErrorMessage'
 import { CubeIcon } from '@heroicons/react/solid'
 import React from 'react'
 
+import { Product } from '../../__generated__/schema.generated'
 import { RecentProductsQuery } from './__generated__/RecentProducts.generated'
 
 export const RECENT_PRODUCTS_QUERY = gql`
@@ -23,7 +24,21 @@ export const RECENT_PRODUCTS_QUERY = gql`
   }
 `
 
-const RecentProductsCard = ({ children }: any) => {
+type SingleProduct =
+  | {
+      __typename?: 'Product' | undefined
+      id: string
+      name: string
+      slug: string
+      avatar?: string | null | undefined
+    }
+  | undefined
+
+const RecentProductsCard = ({
+  children
+}: {
+  children: JSX.Element[] | JSX.Element
+}) => {
   return (
     <div className="mb-4">
       <div className="mb-2 flex items-center gap-2">
@@ -60,8 +75,8 @@ const RecentProducts: React.FC = () => {
     <RecentProductsCard>
       <ErrorMessage title="Failed to load products" error={error} />
       <div className="space-y-3">
-        {products?.map((product: any) => (
-          <ProductProfile key={product?.id} product={product} />
+        {products?.map((product: SingleProduct | Product) => (
+          <ProductProfile key={product?.id} product={product as Product} />
         ))}
       </div>
     </RecentProductsCard>

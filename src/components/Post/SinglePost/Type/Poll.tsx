@@ -40,6 +40,15 @@ interface Props {
   post: Post
 }
 
+// Poll Answers type def
+type PollAnswerType = {
+  __typename?: 'PollAnswer'
+  id: string
+  title: string
+  hasAnswered: boolean
+  voters: { __typename?: 'PollAnswerVotersConnection'; totalCount: number }
+}
+
 const PollType: React.FC<Props> = ({ post }) => {
   const [answerPoll] = useMutation<
     AnswerPollMutation,
@@ -88,7 +97,7 @@ const PollType: React.FC<Props> = ({ post }) => {
           {loading ? (
             <div>Loading Poll...</div>
           ) : (
-            poll?.answers?.map((answer: any) => (
+            poll?.answers?.map((answer: PollAnswerType) => (
               <button
                 key={answer?.id}
                 type="button"

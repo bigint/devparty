@@ -8,16 +8,18 @@ import { CreatePostInput } from 'src/__generated__/schema.generated'
 import { processMentions } from '../processMentions'
 
 export const poll = async (
-  query: any,
+  query: Record<string, unknown>,
   input: CreatePostInput,
   session: Session | null | undefined
 ) => {
   const answers = JSON.parse(input.polls as string)
-  var answersWithIndex = answers.map((el: any, index: number) => {
-    var o = Object.assign({}, el)
-    o.index = index
-    return o
-  })
+  var answersWithIndex = answers.map(
+    (el: Record<string, unknown>, index: number) => {
+      var o = Object.assign({}, el)
+      o.index = index
+      return o
+    }
+  )
 
   const poll = await db.post.create({
     ...query,

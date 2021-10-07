@@ -1,5 +1,5 @@
 export function imagekitURL(
-  url: string,
+  url: string | undefined | null,
   height: string | number = '',
   width: string | number = ''
 ) {

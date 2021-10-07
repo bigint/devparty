@@ -9,7 +9,7 @@ import { CreatePostInput } from 'src/__generated__/schema.generated'
 import { processMentions } from '../processMentions'
 
 export const reply = async (
-  query: any,
+  query: Record<string, unknown>,
   input: CreatePostInput,
   session: Session | null | undefined,
   parentId: string | null | undefined

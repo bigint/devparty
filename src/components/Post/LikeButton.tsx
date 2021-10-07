@@ -8,7 +8,7 @@ import { Post } from 'src/__generated__/schema.generated'
 
 type Props = {
   entity: Post
-  handleLike: any
+  handleLike: (post: Post) => void
   loading: boolean
 }
 

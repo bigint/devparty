@@ -4,6 +4,7 @@ import { Card, CardBody } from '@components/ui/Card'
 import { PageLoading } from '@components/ui/PageLoading'
 import React from 'react'
 
+import { Session } from '../../../../__generated__/schema.generated'
 import Sidebar from '../Sidebar'
 import { SessionsSettingsQuery } from './__generated__/index.generated'
 import SingleSession from './SingleSession'
@@ -54,8 +55,8 @@ const SessionsSettings: React.FC = () => {
       <GridItemEight>
         <Card className="mb-4">
           <CardBody className="space-y-4">
-            {sessions?.map((session: any) => (
-              <SingleSession key={session?.id} session={session} />
+            {sessions?.map((session) => (
+              <SingleSession key={session?.id} session={session as Session} />
             ))}
           </CardBody>
         </Card>

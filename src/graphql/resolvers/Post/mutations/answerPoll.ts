@@ -3,7 +3,7 @@ import { db } from '@utils/prisma'
 import { hasVoted } from '../queries/hasVoted'
 
 export const answerPoll = async (
-  query: any,
+  query: Record<string, unknown>,
   userId: string,
   answerId: string
 ) => {
@@ -24,9 +24,11 @@ export const answerPoll = async (
     })
 
     return poll
-  } catch (error: any) {
-    throw new Error(
-      process.env.NODE_ENV === 'production' ? 'Something went wrong!' : error
-    )
+  } catch (error: unknown) {
+    if (typeof error === 'string') {
+      throw new Error(
+        process.env.NODE_ENV === 'production' ? 'Something went wrong!' : error
+      )
+    }
   }
 }
