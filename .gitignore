@@ -33,3 +33,5 @@ tsconfig.tsbuildinfo
 
 src/**/__generated__/**
 *.rdb
+
+.idea/
