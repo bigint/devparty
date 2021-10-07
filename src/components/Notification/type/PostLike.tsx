@@ -13,7 +13,7 @@ interface Props {
   notification: Notification
 }
 
-const PostLike: React.FC<Props> = ({ notification }) => {
+const PostLike: React.FC<Props> = (props: Props) => {
   return (
     <Card>
       <CardBody className="space-y-4">
@@ -21,23 +21,23 @@ const PostLike: React.FC<Props> = ({ notification }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <HeartIcon className="h-6 w-6 text-pink-500" />
-              <UserProfile user={notification?.dispatcher} />
+              <UserProfile user={props.notification?.dispatcher} />
             </div>
             <div className="flex items-center space-x-3">
               <div className="text-sm cursor-pointer">
-                {timeago.format(notification?.createdAt)}
+                {timeago.format(props.notification?.createdAt)}
               </div>
-              <MarkAsRead notification={notification} />
+              <MarkAsRead notification={props.notification} />
             </div>
           </div>
           <div className="linkify">
             liked your{' '}
-            <Link href={`/posts/${notification?.like?.post?.id}`}>
+            <Link href={`/posts/${props.notification?.like?.post?.id}`}>
               <a>post</a>
             </Link>
           </div>
         </div>
-        <SinglePost post={notification?.like?.post as Post} />
+        <SinglePost post={props.notification?.like?.post as Post} />
       </CardBody>
     </Card>
   )
