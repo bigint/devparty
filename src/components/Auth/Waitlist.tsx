@@ -7,12 +7,12 @@ interface Props {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Waitlist: React.FC<Props> = ({ showModal, setShowModal }) => {
+const Waitlist: React.FC<Props> = (props: Props) => {
   return (
     <Modal
-      onClose={() => setShowModal(!showModal)}
+      onClose={() => props.setShowModal(!props.showModal)}
       title="You are in the waitlist 🎉"
-      show={showModal}
+      show={props.showModal}
     >
       <div className="p-5 text-center space-y-5">
         <img
