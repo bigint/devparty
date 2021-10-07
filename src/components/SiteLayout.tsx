@@ -27,7 +27,7 @@ interface Props {
   children: React.ReactNode
 }
 
-const SiteLayout: React.FC<Props> = ({ children }) => {
+const SiteLayout: React.FC<Props> = (props: Props) => {
   const { resolvedTheme } = useTheme()
   const toastOptions = {
     style: {
@@ -71,7 +71,7 @@ const SiteLayout: React.FC<Props> = ({ children }) => {
       <Toaster position="top-right" toastOptions={toastOptions} />
       <div className="flex flex-col min-h-screen">
         <Navbar />
-        {children}
+        {props.children}
         {data?.me && <MobileFooter />}
       </div>
     </AppContext.Provider>
