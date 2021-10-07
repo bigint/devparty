@@ -33,20 +33,6 @@ input ChangePasswordInput {
   newPassword: String!
 }
 
-type Commit {
-  additions: Int
-  authorAvatar: String
-  authorUsername: String
-  changed: Int
-  deletions: Int
-  id: ID!
-  message: String
-  post: Post!
-  repoSlug: String
-  url: String
-  verified: Boolean
-}
-
 input CreateBadgeInput {
   description: String!
   image: String!
@@ -54,6 +40,7 @@ input CreateBadgeInput {
 }
 
 input CreatePostInput {
+  address: String
   attachments: String
   body: String!
   done: Boolean! = true
@@ -61,6 +48,7 @@ input CreatePostInput {
   polls: String
   productId: ID
   title: String
+  tokenId: String
   type: String! = "POST"
 }
 
@@ -170,6 +158,7 @@ input LoginInput {
 }
 
 input ModUserInput {
+  featuredAt: Boolean
   isStaff: Boolean
   isVerified: Boolean
   spammy: Boolean
@@ -204,6 +193,13 @@ type Mutation {
   togglePostLike(input: TogglePostLikeInput!): Post
   toggleProductSubscribe(input: ToggleProductSubscribeInput!): Product
   toggleTopicStar(input: ToggleTopicStarInput!): Topic
+}
+
+type NFT {
+  address: String!
+  id: ID!
+  post: Post!
+  tokenId: String!
 }
 
 type Notification {
@@ -259,12 +255,12 @@ type PollAnswerVotersConnectionEdge {
 type Post {
   attachments: Attachments
   body: String!
-  commit: Commit
   createdAt: DateTime!
   done: Boolean!
   hasLiked: Boolean!
   id: ID!
   likes(after: String, before: String, first: Int, last: Int): PostLikesConnection!
+  nft: NFT
   oembedUrl: String
   parent: Post
   poll: Poll
@@ -345,6 +341,7 @@ type Profile {
 type Query {
   badges(after: String, before: String, first: Int, last: Int): QueryBadgesConnection!
   exploreFeed(after: String, before: String, first: Int, last: Int): QueryExploreFeedConnection!
+  featuredUsers(after: String, before: String, first: Int, last: Int): QueryFeaturedUsersConnection!
   homeFeed(after: String, before: String, first: Int, last: Int, type: String! = "ALL"): QueryHomeFeedConnection!
   integration(userId: ID): Integration
   invite(code: String!): Invite
@@ -386,6 +383,16 @@ type QueryExploreFeedConnection {
 type QueryExploreFeedConnectionEdge {
   cursor: String!
   node: Post!
+}
+
+type QueryFeaturedUsersConnection {
+  edges: [QueryFeaturedUsersConnectionEdge]!
+  pageInfo: PageInfo!
+}
+
+type QueryFeaturedUsersConnectionEdge {
+  cursor: String!
+  node: User!
 }
 
 type QueryHomeFeedConnection {
@@ -609,6 +616,7 @@ type User {
   badges(after: String, before: String, first: Int, last: Int): UserBadgesConnection!
   createdAt: DateTime!
   email: String!
+  featuredAt: DateTime
   followers(after: String, before: String, first: Int, last: Int): UserFollowersConnection!
   following(after: String, before: String, first: Int, last: Int): UserFollowingConnection!
   hasFollowed: Boolean!

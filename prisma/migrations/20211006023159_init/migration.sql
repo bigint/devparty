@@ -82,7 +82,7 @@ CREATE TABLE `posts` (
     `title` VARCHAR(191),
     `body` TEXT NOT NULL,
     `done` BOOLEAN NOT NULL DEFAULT false,
-    `type` ENUM('POST', 'TASK', 'QUESTION', 'POLL', 'COMMIT', 'REPLY') NOT NULL DEFAULT 'POST',
+    `type` ENUM('POST', 'TASK', 'QUESTION', 'POLL', 'COMMIT', 'NFT', 'REPLY') NOT NULL DEFAULT 'POST',
     `attachments` JSON,
     `hidden` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -95,20 +95,13 @@ CREATE TABLE `posts` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `commit` (
+CREATE TABLE `nfts` (
     `id` VARCHAR(191) NOT NULL,
-    `repoSlug` VARCHAR(191),
-    `message` VARCHAR(191),
-    `url` VARCHAR(191),
-    `verified` BOOLEAN,
-    `changed` INTEGER,
-    `additions` INTEGER,
-    `deletions` INTEGER,
-    `authorUsername` VARCHAR(191),
-    `authorAvatar` VARCHAR(191),
+    `tokenId` VARCHAR(191) NOT NULL,
+    `address` VARCHAR(191) NOT NULL,
     `postId` VARCHAR(191),
 
-    UNIQUE INDEX `commit_postId_unique`(`postId`),
+    UNIQUE INDEX `nfts_postId_key`(`postId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -117,14 +110,14 @@ CREATE TABLE `poll` (
     `id` VARCHAR(191) NOT NULL,
     `postId` VARCHAR(191),
 
-    UNIQUE INDEX `poll_postId_unique`(`postId`),
+    UNIQUE INDEX `poll_postId_key`(`postId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `poll_answers` (
     `id` VARCHAR(191) NOT NULL,
-    `index` VARCHAR(191) NOT NULL,
+    `index` INTEGER NOT NULL,
     `title` VARCHAR(191) NOT NULL,
     `pollId` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -218,7 +211,7 @@ CREATE TABLE `integrations` (
     `spotifyRefreshToken` VARCHAR(191),
     `userId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `integrations_userId_unique`(`userId`),
+    UNIQUE INDEX `integrations_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

@@ -1,10 +1,11 @@
 import Redis from 'ioredis'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { IS_PRODUCTION } from 'src/constants'
 import { unfurl } from 'unfurl.js'
 
 const redis = new Redis(process.env.REDIS_URL)
 
-const oembed = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { url } = req.query
   if (url) {
     try {
@@ -26,7 +27,7 @@ const oembed = async (req: NextApiRequest, res: NextApiResponse) => {
           parsedUrl,
           JSON.stringify(data),
           'EX',
-          process.env.NODE_ENV === 'production' ? 864000 : 5
+          IS_PRODUCTION ? 864000 : 5
         )
         res.setHeader('Cache-Control', 'max-age=0, s-maxage=864000')
         return res.status(200).json(data)
@@ -45,4 +46,4 @@ const oembed = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default oembed
+export default handler
