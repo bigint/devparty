@@ -3,6 +3,7 @@ import mixpanel from 'mixpanel-browser'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
+import { IS_PRODUCTION } from 'src/constants'
 
 import { User } from '../__generated__/schema.generated'
 import { CurrentUserQuery } from './__generated__/SiteLayout.generated'
@@ -10,7 +11,7 @@ import MobileFooter from './shared/MobileFooter'
 import Navbar from './shared/Navbar'
 import AppContext from './utils/AppContext'
 
-mixpanel.init(true ? 'ebe03e94eac57d2b33456503c24c02da' : '000')
+mixpanel.init(IS_PRODUCTION ? 'ebe03e94eac57d2b33456503c24c02da' : '000')
 
 export const CURRENT_USER_QUERY = gql`
   query CurrentUserQuery {
