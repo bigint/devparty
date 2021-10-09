@@ -34,11 +34,7 @@ type SingleProduct =
     }
   | undefined
 
-const RecentProductsCard = ({
-  children
-}: {
-  children: JSX.Element[] | JSX.Element
-}) => {
+const RecentProductsCard = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="mb-4">
       <div className="mb-2 flex items-center gap-2">
@@ -75,7 +71,7 @@ const RecentProducts: React.FC = () => {
     <RecentProductsCard>
       <ErrorMessage title="Failed to load products" error={error} />
       <div className="space-y-3">
-        {products?.map((product: SingleProduct | Product) => (
+        {products?.map((product) => (
           <ProductProfile key={product?.id} product={product as Product} />
         ))}
       </div>
