@@ -120,6 +120,12 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
     togglePostLike({
       variables: {
         input: { id: post?.id }
+      },
+      onError() {
+        mixpanel.track('post.like.failed')
+      },
+      onCompleted() {
+        mixpanel.track('post.like.success')
       }
     })
   }
