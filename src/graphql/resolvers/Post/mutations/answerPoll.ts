@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client'
 import { db } from '@utils/prisma'
 import { ERROR_MESSAGE, IS_PRODUCTION } from 'src/constants'
 
@@ -25,9 +26,9 @@ export const answerPoll = async (
     })
 
     return poll
-  } catch (error: unknown) {
-    if (typeof error === 'string') {
-      throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error)
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      throw new Error(IS_PRODUCTION ? ERROR_MESSAGE : error.message)
     }
   }
 }

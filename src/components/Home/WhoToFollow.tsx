@@ -35,7 +35,7 @@ const WHO_TO_FOLLOW_QUERY = gql`
   }
 `
 
-type Props = {
+interface Props {
   children: JSX.Element | JSX.Element[]
   refetch?: (
     variables?: Partial<OperationVariables> | undefined
