@@ -1,15 +1,11 @@
 FROM gitpod/workspace-mysql
 
-# Install Node and Yarn
-ENV NODE_VERSION=16.11.0
-RUN bash -c ". .nvm/nvm.sh && \
-        nvm install ${NODE_VERSION} && \
-        nvm alias default ${NODE_VERSION} && \
-        npm install -g yarn"
-ENV PATH=/home/gitpod/.nvm/versions/node/v${NODE_VERSION}/bin:$PATH
+USER gitpod
 
-# Install Redis.
-RUN sudo apt-get update \
-        && sudo apt-get install -y \
-        redis-server \
-        && sudo rm -rf /var/lib/apt/lists/*
+# Install Packages
+RUN brew install node
+RUN brew install redis
+
+# Install Oh-My-Zsh
+ENV ZSH_THEME cloud
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
