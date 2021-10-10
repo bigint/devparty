@@ -10,7 +10,7 @@ import { useTheme } from 'next-themes'
 import { Fragment, useContext } from 'react'
 import { User } from 'src/__generated__/schema.generated'
 
-import Slug from '../Slug'
+import Slug from '../../Slug'
 
 const NextLink = ({ href, children, ...rest }: any) => (
   <Link href={href}>
