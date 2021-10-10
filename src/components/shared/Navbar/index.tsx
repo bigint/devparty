@@ -8,6 +8,7 @@ import { useContext } from 'react'
 
 import BetaBadge from '../BetaBadge'
 import MenuItems from './MenuItems'
+import MoreNavItems from './MoreNavItems'
 import Notification from './Notification'
 import Search from './Search'
 
@@ -60,6 +61,7 @@ const Navbar: React.FC = () => {
           name="Explore"
           current={router.pathname == '/explore'}
         />
+        <MoreNavItems />
       </>
     )
   }
@@ -99,7 +101,9 @@ const Navbar: React.FC = () => {
                 <div className="hidden md:block">
                   <Invite />
                 </div>
-                <Notification />
+                <div className="hidden md:block">
+                  <Notification />
+                </div>
                 <MenuItems currentUser={currentUser} />
               </div>
             ) : (

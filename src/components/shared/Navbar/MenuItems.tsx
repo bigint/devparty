@@ -4,6 +4,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { CogIcon, LogoutIcon, UserIcon } from '@heroicons/react/outline'
 import { ShieldCheckIcon, ShieldExclamationIcon } from '@heroicons/react/solid'
 import clsx from 'clsx'
+import mixpanel from 'mixpanel-browser'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { Fragment, useContext } from 'react'
@@ -28,6 +29,7 @@ const MenuItems: React.FC<Props> = ({ currentUser }) => {
   const toggleStaffMode = () => {
     localStorage.setItem('staffMode', String(!staffMode))
     setStaffMode(!staffMode)
+    mixpanel.track(`staff.mode.${staffMode ? 'enabled' : 'disabled'}`)
   }
 
   return (
@@ -57,7 +59,7 @@ const MenuItems: React.FC<Props> = ({ currentUser }) => {
           >
             <Menu.Items
               static
-              className="origin-top-right absolute right-0 w-48 rounded-lg shadow-md py-1 bg-white dark:bg-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none mt-2"
+              className="origin-top-right absolute right-0 w-48 rounded-lg shadow-md py-1 bg-white dark:bg-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none mt-2 border dark:border-gray-800"
             >
               <Menu.Item
                 as={NextLink}
@@ -123,19 +125,28 @@ const MenuItems: React.FC<Props> = ({ currentUser }) => {
               <div className="border-b dark:border-gray-800"></div>
               <div className="px-5 py-3 flex items-center space-x-3">
                 <button
-                  onClick={() => setTheme('light')}
+                  onClick={() => {
+                    mixpanel.track('theme.light')
+                    setTheme('light')
+                  }}
                   className={theme === 'light' ? 'text-xl' : ''}
                 >
                   🌞
                 </button>
                 <button
-                  onClick={() => setTheme('dark')}
+                  onClick={() => {
+                    mixpanel.track('theme.dark')
+                    setTheme('dark')
+                  }}
                   className={theme === 'dark' ? 'text-xl' : ''}
                 >
                   🌚
                 </button>
                 <button
-                  onClick={() => setTheme('system')}
+                  onClick={() => {
+                    mixpanel.track('theme.system')
+                    setTheme('system')
+                  }}
                   className={theme === 'system' ? 'text-xl' : ''}
                 >
                   💻

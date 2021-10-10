@@ -10,6 +10,7 @@ import { Card, CardBody } from '@components/ui/Card'
 import { ErrorMessage } from '@components/ui/ErrorMessage'
 import { UsersIcon } from '@heroicons/react/outline'
 import { RefreshIcon, SparklesIcon } from '@heroicons/react/solid'
+import mixpanel from 'mixpanel-browser'
 import React from 'react'
 
 import { User } from '../../__generated__/schema.generated'
@@ -53,6 +54,7 @@ const WhoToFollowCard = ({ children, refetch }: Props) => {
         <button
           onClick={() => {
             if (refetch) {
+              mixpanel.track('refreshed.whotofollow')
               refetch()
             }
           }}

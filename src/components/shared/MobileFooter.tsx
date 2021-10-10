@@ -1,15 +1,15 @@
 import AppContext from '@components/utils/AppContext'
 import {
-  CubeIcon,
-  GlobeIcon,
+  GlobeAltIcon,
   HomeIcon,
-  UserIcon
+  LightningBoltIcon,
+  UserGroupIcon
 } from '@heroicons/react/outline'
 import {
-  CubeIcon as CubeIconSolid,
-  GlobeIcon as GlobeIconSolid,
+  GlobeAltIcon as GlobeAltIconSolid,
   HomeIcon as HomeIconSolid,
-  UserIcon as UserIconSolid
+  LightningBoltIcon as LightningBoltIconSolid,
+  UserGroupIcon as UserGroupIconSolid
 } from '@heroicons/react/solid'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -21,40 +21,64 @@ const MobileFooter: React.FC = () => {
 
   return (
     <div className="block sm:hidden">
-      <div className="bg-white dark:bg-gray-800 bg-opacity-70 dark:bg-opacity-70 backdrop-filter backdrop-blur-lg backdrop-saturate-150 border-gray-200 dark:border-gray-700 border-t bottom-0 fixed w-full z-50 flex items-center justify-between">
+      <div className="mobile-footer bg-white dark:bg-gray-800 bg-opacity-70 dark:bg-opacity-70 backdrop-filter backdrop-blur-lg backdrop-saturate-150 border-gray-200 dark:border-gray-700 border-t bottom-0 fixed w-full z-50 flex items-center justify-between px-5">
         <Link href={currentUser ? '/home' : '/'}>
-          <a className="py-4 px-8">
+          <a className="text-[0.7rem] py-1.5">
             {router.pathname == '/home' ? (
-              <HomeIconSolid className="h-6 w-6 text-brand-500" />
+              <div className="text-brand-500 font-bold space-y-[0.3rem]">
+                <HomeIconSolid className="h-[1.3rem] w-[1.3rem] mx-auto" />
+                <div>Home</div>
+              </div>
             ) : (
-              <HomeIcon className="h-6 w-6" />
+              <div className="space-y-[0.3rem]">
+                <HomeIcon className="h-[1.3rem] w-[1.3rem] mx-auto" />
+                <div>Home</div>
+              </div>
             )}
           </a>
         </Link>
-        <Link href="/products">
-          <a className="py-4 px-8">
-            {router.pathname == '/products' ? (
-              <CubeIconSolid className="h-6 w-6 text-brand-500" />
+        <Link href="/notifications">
+          <a className="text-[0.7rem] py-1.5">
+            {router.pathname == '/notifications' ? (
+              <div className="text-brand-500 font-bold space-y-[0.3rem]">
+                <LightningBoltIconSolid className="h-[1.3rem] w-[1.3rem] mx-auto" />
+                <div>Notifications</div>
+              </div>
             ) : (
-              <CubeIcon className="h-6 w-6" />
+              <div className="space-y-[0.3rem]">
+                <LightningBoltIcon className="h-[1.3rem] w-[1.3rem] mx-auto" />
+                <div>Notifications</div>
+              </div>
             )}
           </a>
         </Link>
         <Link href="/explore">
-          <a className="py-4 px-8">
+          <a className="text-[0.7rem] py-1.5">
             {router.pathname == '/explore' ? (
-              <GlobeIconSolid className="h-6 w-6 text-brand-500" />
+              <div className="text-brand-500 font-bold space-y-[0.3rem]">
+                <GlobeAltIconSolid className="h-[1.3rem] w-[1.3rem] mx-auto" />
+                <div>Explore</div>
+              </div>
             ) : (
-              <GlobeIcon className="h-6 w-6" />
+              <div className="space-y-[0.3rem]">
+                <GlobeAltIcon className="h-[1.3rem] w-[1.3rem] mx-auto" />
+                <div>Explore</div>
+              </div>
             )}
           </a>
         </Link>
         <Link href={`/@/${currentUser?.username}`}>
-          <a className="py-4 px-8">
+          <a className="text-[0.7rem] py-1.5">
             {router.pathname == '/@/[username]' ? (
-              <UserIconSolid className="h-6 w-6 text-brand-500" />
+              <div className="text-brand-500 font-bold space-y-[0.3rem]">
+                <UserGroupIconSolid className="h-[1.3rem] w-[1.3rem] mx-auto" />
+                <div>Communities</div>
+              </div>
             ) : (
-              <UserIcon className="h-6 w-6" />
+              <div className="space-y-[0.3rem]">
+                <UserGroupIcon className="h-[1.3rem] w-[1.3rem] mx-auto" />
+                <div>Communities</div>
+              </div>
             )}
           </a>
         </Link>
