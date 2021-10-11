@@ -23,17 +23,6 @@ export const RECENT_PRODUCTS_QUERY = gql`
     }
   }
 `
-
-type SingleProduct =
-  | {
-      __typename?: 'Product' | undefined
-      id: string
-      name: string
-      slug: string
-      avatar?: string | null | undefined
-    }
-  | undefined
-
 const RecentProductsCard = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="mb-4">

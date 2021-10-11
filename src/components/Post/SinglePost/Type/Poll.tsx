@@ -42,7 +42,7 @@ interface Props {
 }
 
 // Poll Answers type def
-type PollAnswerType = {
+interface PollAnswerType {
   __typename?: 'PollAnswer'
   id: string
   title: string

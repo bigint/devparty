@@ -37,7 +37,7 @@ const WHO_TO_FOLLOW_QUERY = gql`
 `
 
 interface Props {
-  children: JSX.Element | JSX.Element[]
+  children: React.ReactNode
   refetch?: (
     variables?: Partial<OperationVariables> | undefined
   ) => Promise<ApolloQueryResult<any>>
