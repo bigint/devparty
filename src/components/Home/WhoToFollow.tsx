@@ -55,6 +55,7 @@ const WhoToFollowCard = ({ children, refetch }: Props) => {
           onClick={() => {
             mixpanel.track('refreshed.whotofollow')
             if (refetch) {
+              mixpanel.track('refreshed.whotofollow')
               refetch()
             }
           }}

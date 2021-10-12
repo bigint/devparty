@@ -117,6 +117,7 @@ const SinglePost: React.FC<Props> = ({ post, showParent = false }) => {
 
   const handleLike = (post: Post) => {
     mixpanel.track('post.liked')
+    mixpanel.track('post.like.click')
     togglePostLike({
       variables: {
         input: { id: post?.id }
