@@ -13,7 +13,7 @@ import { uploadToIPFS } from '@components/utils/uploadToIPFS'
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import mixpanel from 'mixpanel-browser'
 import dynamic from 'next/dynamic'
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { User } from 'src/__generated__/schema.generated'
 import { object, string } from 'zod'
@@ -185,7 +185,9 @@ const ProfileSettingsForm: React.FC<Props> = ({ currentUser }) => {
                     alt={avatar}
                   />
                   <ChooseFile
-                    onChange={(evt: any) => handleUpload(evt, 'avatar')}
+                    onChange={(evt: ChangeEvent<HTMLInputElement>) =>
+                      handleUpload(evt, 'avatar')
+                    }
                   />
                   {currentUser?.integrations?.ethAddress && (
                     <NFTAvatars
@@ -210,7 +212,9 @@ const ProfileSettingsForm: React.FC<Props> = ({ currentUser }) => {
                     </div>
                   )}
                   <ChooseFile
-                    onChange={(evt: any) => handleUpload(evt, 'cover')}
+                    onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
+                      handleUpload(evt, 'cover')
+                    }
                   />
                 </div>
               </div>

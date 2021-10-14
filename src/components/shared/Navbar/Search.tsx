@@ -1,4 +1,5 @@
 import { gql, useLazyQuery } from '@apollo/client'
+import React from 'react'
 
 import {
   SearchPostsQuery,
@@ -52,7 +53,7 @@ const Search: React.FC = () => {
     SEARCH_PRODUCTS_QUERY
   )
 
-  const handleSearch = (evt: any) => {
+  const handleSearch = (evt: React.ChangeEvent<HTMLInputElement>) => {
     searchPosts({
       variables: {
         keyword: evt.target.value

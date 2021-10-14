@@ -15,7 +15,7 @@ import {
 } from '@heroicons/react/outline'
 import mixpanel from 'mixpanel-browser'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import toast from 'react-hot-toast'
 import { object, string } from 'zod'
 
@@ -76,7 +76,7 @@ const PollType: React.FC = () => {
     calculateError()
   }
 
-  const handleChange = (i: any, e: any) => {
+  const handleChange = (i: number, e: ChangeEvent<HTMLInputElement>) => {
     let newPolls = [...polls]
     // @ts-ignore
     newPolls[i][e.target.name] = e.target.value

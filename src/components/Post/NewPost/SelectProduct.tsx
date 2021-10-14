@@ -60,7 +60,7 @@ const SelectProduct: React.FC<Props> = ({ setSelectedProduct }) => {
               static
               className="z-10 absolute mt-1 border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-md rounded-lg py-1 px-2 text-base focus:outline-none sm:text-sm"
             >
-              {products?.map((product: any) => (
+              {products?.map((product) => (
                 <Listbox.Option
                   key={product?.id}
                   className={({ active }) =>

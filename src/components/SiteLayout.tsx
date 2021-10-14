@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { IS_PRODUCTION } from 'src/constants'
 
+import { User } from '../__generated__/schema.generated'
 import { CurrentUserQuery } from './__generated__/SiteLayout.generated'
 import MobileFooter from './shared/MobileFooter'
 import Navbar from './shared/Navbar'
@@ -64,7 +65,7 @@ const SiteLayout: React.FC<Props> = ({ children }) => {
   }, [])
 
   const injectedGlobalContext = {
-    currentUser: data?.me,
+    currentUser: data?.me as User,
     currentUserLoading: loading,
     currentUserError: error,
     staffMode,

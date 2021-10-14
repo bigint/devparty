@@ -1,4 +1,9 @@
-import { gql, useQuery } from '@apollo/client'
+import {
+  ApolloQueryResult,
+  gql,
+  OperationVariables,
+  useQuery
+} from '@apollo/client'
 import UserProfileShimmer from '@components/shared/Shimmer/UserProfileShimmer'
 import UserProfile from '@components/shared/UserProfile'
 import { Card, CardBody } from '@components/ui/Card'
@@ -8,6 +13,7 @@ import { RefreshIcon, SparklesIcon } from '@heroicons/react/solid'
 import mixpanel from 'mixpanel-browser'
 import React from 'react'
 
+import { User } from '../../__generated__/schema.generated'
 import { WhoToFollowQuery } from './__generated__/WhoToFollow.generated'
 
 const WHO_TO_FOLLOW_QUERY = gql`
@@ -30,7 +36,14 @@ const WHO_TO_FOLLOW_QUERY = gql`
   }
 `
 
-const WhoToFollowCard = ({ children, refetch }: any) => {
+interface Props {
+  children: React.ReactNode
+  refetch?: (
+    variables?: Partial<OperationVariables> | undefined
+  ) => Promise<ApolloQueryResult<any>>
+}
+
+const WhoToFollowCard = ({ children, refetch }: Props) => {
   return (
     <div className="mb-4">
       <div className="flex items-center justify-between mb-2">
@@ -41,7 +54,10 @@ const WhoToFollowCard = ({ children, refetch }: any) => {
         <button
           onClick={() => {
             mixpanel.track('refreshed.whotofollow')
-            refetch()
+            if (refetch) {
+              mixpanel.track('refreshed.whotofollow')
+              refetch()
+            }
           }}
         >
           <RefreshIcon className="h-5 w-5" />
@@ -88,8 +104,8 @@ const WhoToFollow: React.FC = () => {
             <div>Nothing to suggest</div>
           </div>
         )}
-        {users?.map((user: any) => (
-          <UserProfile key={user?.id} user={user} showFollow />
+        {users?.map((user) => (
+          <UserProfile key={user?.id} user={user as User} showFollow />
         ))}
       </div>
     </WhoToFollowCard>
