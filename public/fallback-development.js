@@ -1,8 +1,7 @@
 /******/ ;(() => {
   // webpackBootstrap
   /******/ 'use strict'
-  var __webpack_exports__ = {}
-
+ 
   self.fallback = async (request) => {
     // https://developer.mozilla.org/en-US/docs/Web/API/RequestDestination
     switch (request.destination) {
