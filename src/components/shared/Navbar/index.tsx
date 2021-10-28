@@ -117,10 +117,10 @@ const Navbar: React.FC = () => {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex items-center space-x-4">
+                    <NavItems />
                     <div className="hidden md:block">
                       <Search />
                     </div>
-                    <NavItems />
                   </div>
                 </div>
               </div>
@@ -187,9 +187,9 @@ const Navbar: React.FC = () => {
               <Search />
             </div>
             <div className="px-2 pt-1 pb-2 space-y-1">
-              <NavItems isMobile />
+              <NavItems isMobile={isMobile} />
             </div>
-            <div className="px-2 pt-1 pb-3 flex items-center justify-start gap-x-3">
+            <div className="px-2 pt-1 pb-3 flex items-center justify-between gap-x-3">
               <Link href="/login" passHref>
                 <Button
                   className="h-12 w-full flex justify-center"
@@ -201,7 +201,7 @@ const Navbar: React.FC = () => {
               </Link>
               <Link href="/signup" passHref>
                 <Button
-                  className="h-12 w-full flex justify-center"
+                  className="h-12 w-full flex justify-between"
                   variant="success"
                   size="lg"
                   icon={<UserAddIcon className="h-6 w-6" />}
