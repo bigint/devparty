@@ -4,6 +4,7 @@ import { Checkbox } from '@components/UI/Checkbox'
 import { Form, useZodForm } from '@components/UI/Form'
 import { Input } from '@components/UI/Input'
 import { Spinner } from '@components/UI/Spinner'
+import { getBiconomy } from '@components/utils/getBiconomy'
 import getNFTData from '@components/utils/getNFTData'
 import getWeb3Modal from '@components/utils/getWeb3Modal'
 import { Switch } from '@headlessui/react'
@@ -17,7 +18,7 @@ import { Post } from 'src/__generated__/schema.generated'
 import { IS_PRODUCTION, NFT_CONTRACT_ADDRESS } from 'src/constants'
 import { boolean, object, string } from 'zod'
 
-import Market from '../../../../artifacts/contracts/NFT.sol/Devparty.json'
+import NFT from '../../../../artifacts/contracts/NFT.sol/Devparty.json'
 import {
   MintNftMutation,
   MintNftMutationVariables
@@ -76,62 +77,12 @@ const Mint: React.FC<Props> = ({ post }) => {
     }
   })
 
-  const mintToken = async (url: string) => {
+  const mintToken = async () => {
     try {
-      // Get signature from the user
-      const web3Modal = getWeb3Modal()
-      const web3 = new ethers.providers.Web3Provider(await web3Modal.connect())
-      const signer = await web3.getSigner()
-      const { name: currentNetworkName } = await web3.getNetwork()
-      // TODO: Change to maticmum
-      const expectedNetworkName = IS_PRODUCTION ? 'maticmum' : 'maticmum'
-
-      if (currentNetworkName !== expectedNetworkName) {
-        setIsMinting(false)
-        return toast.error('You are in wrong network!')
-      }
-
-      // Mint the Item
-      const contract = new ethers.Contract(
-        NFT_CONTRACT_ADDRESS as string,
-        Market.abi,
-        signer
-      )
-      setMintingStatusText('Minting NFT in progress')
-      const transaction = await contract.issueToken(
-        await signer.getAddress(),
-        form.watch('quantity'),
-        url
-      )
-      const finishedTransaction = await transaction.wait()
-      let event = finishedTransaction.events[0]
-
-      // Add transaction to the DB
-      mintNFT({
-        variables: {
-          input: {
-            postId: post?.id,
-            address: transaction.to,
-            tokenId: event.args[3].toString()
-          }
-        }
-      })
-
-      toast.success('Minting has been successfully completed!')
-      setMintingStatus('COMPLETED')
-    } catch (error) {
-      console.log(error)
-      setIsMinting(false)
-      setMintingStatus('ERRORED')
-      toast.error('Transaction has been cancelled!')
-    }
-  }
-
-  const generateNft = async () => {
-    setMintingStatus('IN_PROGRESS')
-    setIsMinting(true)
-    try {
-      setMintingStatusText('Converting your post as art')
+      // Upload to IPFS
+      setMintingStatus('IN_PROGRESS')
+      setIsMinting(true)
+      setMintingStatusText('Converting your post as an art')
       const { cid } = await client.add(
         urlSource(
           `https://nft.devparty.io/${post?.body}?avatar=${post?.user?.profile?.avatar}`
@@ -145,9 +96,57 @@ const Mint: React.FC<Props> = ({ post }) => {
         })
       )
       const url = `https://ipfs.infura.io/ipfs/${path}`
-      mintToken(url)
-    } catch {
+
+      // Start Minting
+      setMintingStatusText(
+        'Minting in progress, you will be asked to sign in your wallet'
+      )
+      const web3Modal = getWeb3Modal()
+      const { biconomy, web3 } = await getBiconomy(web3Modal)
+      const signerAddress = await web3.getSigner().getAddress()
+
+      const contract = new ethers.Contract(
+        NFT_CONTRACT_ADDRESS as string,
+        NFT.abi,
+        biconomy.getSignerByAddress(signerAddress)
+      )
+
+      const { data } = await contract.populateTransaction.issueToken(
+        signerAddress,
+        form.watch('quantity'),
+        url
+      )
+
+      const provider = biconomy.getEthersProvider()
+      const transaction = await provider.send('eth_sendTransaction', [
+        {
+          data,
+          from: signerAddress,
+          to: NFT_CONTRACT_ADDRESS as string,
+          signatureType: 'EIP712_SIGN'
+        }
+      ])
+      setMintingStatusText('Pushing your NFT in to the network')
+      provider.once(transaction, (result: any) => {
+        mintNFT({
+          variables: {
+            input: {
+              postId: post?.id,
+              address: NFT_CONTRACT_ADDRESS as string,
+              tokenId: contract.interface
+                .decodeFunctionResult('issueToken', result.logs[0].data)[0]
+                .toString()
+            }
+          }
+        })
+
+        setMintingStatus('COMPLETED')
+      })
+    } catch (error) {
+      console.log(error)
       setIsMinting(false)
+      setMintingStatus('ERRORED')
+      toast.error('Transaction has been cancelled!')
     }
   }
 
@@ -186,7 +185,7 @@ const Mint: React.FC<Props> = ({ post }) => {
           <div>{mintingStatusText}</div>
         </div>
       ) : (
-        <Form form={form} onSubmit={generateNft}>
+        <Form form={form} onSubmit={mintToken}>
           <div className="px-5 py-3.5 space-y-7">
             <div>
               <Input

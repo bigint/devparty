@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
+    "@biconomy/mexa": "^2.0.21",
     "@giraphql/core": "^2.16.0",
     "@giraphql/plugin-directives": "^2.8.0",
     "@giraphql/plugin-prisma": "^0.10.0",
@@ -32,6 +33,7 @@
     "@hookform/resolvers": "^2.8.2",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@opengsn/contracts": "^2.2.4",
     "@openzeppelin/contracts": "^4.3.2",
     "@prisma/client": "3.3.0",
     "@rehooks/online-status": "^1.1.2",
