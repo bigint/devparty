@@ -19,7 +19,7 @@ const Landing: React.FC = () => {
               alt="Waving Emoji"
             />
             <div className="font-extrabold text-4xl">
-              Welcome, To the social media for developers
+              Welcome to the social media for developers
             </div>
             <div className="font-bold text-gray-700 dark:text-gray-400 text-2xl">
               Join Devparty today.
