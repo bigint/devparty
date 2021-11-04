@@ -62,8 +62,6 @@ graphcdn:
 warmup:
   script:
     - ./scripts/warmup.sh
-  only:
-    - schedules
   rules:
     - if: '$WARMUP == "true"'
 
