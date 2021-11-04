@@ -64,6 +64,7 @@ warmup:
     - ./scripts/warmup.sh
   rules:
     - if: '$WARMUP == "true"'
+      when: never
 
 migrate:
   script:
