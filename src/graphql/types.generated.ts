@@ -1250,6 +1250,7 @@ export type Topic = {
   description?: Maybe<Scalars['String']>
   featuredAt?: Maybe<Scalars['DateTime']>
   hasStarred: Scalars['Boolean']
+  htmlUrl: Scalars['String']
   id: Scalars['ID']
   image?: Maybe<Scalars['String']>
   name: Scalars['String']
