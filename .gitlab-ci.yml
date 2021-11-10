@@ -34,9 +34,9 @@ before_script:
 danger:
   stage: danger
   before_script: []
-  script:
-    - printenv
-    - npx danger ci
+  script: npx danger ci
+  only:
+    - merge_requests
 
 lint:
   stage: test
