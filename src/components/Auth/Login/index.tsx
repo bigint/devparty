@@ -1,12 +1,27 @@
 import Hero from '@components/shared/Hero'
+import { PageLoading } from '@components/UI/PageLoading'
+import AppContext from '@components/utils/AppContext'
 import Head from 'next/head'
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useContext } from 'react'
 import { STATIC_ASSETS } from 'src/constants'
 
 import LoginForm from './Form'
 
 const Login: React.FC = () => {
+  const { currentUser, currentUserLoading } = useContext(AppContext)
+  const router = useRouter()
+
+  if (currentUserLoading) {
+    return <PageLoading message="Loading login" />
+  }
+
+  if (currentUser) {
+    if (process.browser) router.push('/home')
+    return <PageLoading message="Redirecting to Home" />
+  }
+
   return (
     <div className="flex flex-grow">
       <Head>
