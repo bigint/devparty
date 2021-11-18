@@ -1,13 +1,11 @@
 import React from 'react'
 
+import { Spinner } from './Spinner'
+
 export const PageLoading: React.FC = () => {
   return (
     <div className="flex flex-grow items-center justify-center">
-      <img
-        className="block h-15 sm:h-10 w-auto"
-        src="/logo.svg"
-        alt="Devparty"
-      />
+      <Spinner />
     </div>
   )
 }

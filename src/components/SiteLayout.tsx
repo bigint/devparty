@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import { PageLoading } from '@components/UI/PageLoading'
+import { SiteLoading } from '@components/UI/SiteLoading'
 import { CurrentUserQuery, User } from '@graphql/types.generated'
 import Head from 'next/head'
 import { useTheme } from 'next-themes'
@@ -75,7 +75,7 @@ const SiteLayout: React.FC<Props> = ({ children }) => {
   }
 
   if (loading) {
-    return <PageLoading />
+    return <SiteLoading />
   }
 
   return (
