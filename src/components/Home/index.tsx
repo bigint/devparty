@@ -14,22 +14,18 @@ import WhoToFollow from './WhoToFollow'
 const Footer = dynamic(() => import('@components/shared/Footer'))
 
 const Home: React.FC = () => {
-  const { currentUser, currentUserLoading } = useContext(AppContext)
+  const { currentUser } = useContext(AppContext)
   const router = useRouter()
   const [feedType, setFeedType] = useState<string>('ALL')
 
-  if (currentUserLoading) {
-    return <PageLoading message="Loading home" />
-  }
-
   if (!currentUser) {
     if (process.browser) router.push('/login')
-    return <PageLoading message="Redirecting to Login" />
+    return <PageLoading />
   }
 
   if (!currentUser.isOnboarded) {
     if (process.browser) router.push('/onboarding')
-    return <PageLoading message="Redirecting to Onboard" />
+    return <PageLoading />
   }
 
   return (

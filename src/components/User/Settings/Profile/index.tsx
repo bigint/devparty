@@ -36,9 +36,7 @@ const ProfileSettings: React.FC = () => {
     GET_PROFILE_SETTINGS_QUERY
   )
 
-  if (loading) {
-    return <PageLoading message="Loading settings" />
-  }
+  if (loading) return <PageLoading />
 
   return (
     <>

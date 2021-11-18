@@ -67,9 +67,7 @@ const SessionsSettings: React.FC = () => {
     }
   })
 
-  if (loading) {
-    return <PageLoading message="Loading sessions" />
-  }
+  if (loading) return <PageLoading />
 
   return (
     <GridLayout>

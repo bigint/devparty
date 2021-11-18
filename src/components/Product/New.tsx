@@ -38,7 +38,7 @@ const newProductSchema = object({
 
 const NewProduct: React.FC = () => {
   const router = useRouter()
-  const { currentUser, currentUserLoading } = useContext(AppContext)
+  const { currentUser } = useContext(AppContext)
   const [createProduct, createProductResult] = useMutation<
     CreateProductMutation,
     CreateProductMutationVariables
@@ -63,11 +63,9 @@ const NewProduct: React.FC = () => {
     schema: newProductSchema
   })
 
-  if (currentUserLoading) return <PageLoading message="Loading" />
-
   if (!currentUser) {
     if (process.browser) router.push('/login')
-    return <PageLoading message="Redirecting to Login" />
+    return <PageLoading />
   }
 
   return (

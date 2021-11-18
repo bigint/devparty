@@ -10,16 +10,12 @@ import { STATIC_ASSETS } from 'src/constants'
 import SignupForm from './Form'
 
 const Signup: React.FC = () => {
-  const { currentUser, currentUserLoading } = useContext(AppContext)
+  const { currentUser } = useContext(AppContext)
   const router = useRouter()
-
-  if (currentUserLoading) {
-    return <PageLoading message="Loading signup" />
-  }
 
   if (currentUser) {
     if (process.browser) router.push('/home')
-    return <PageLoading message="Redirecting to Home" />
+    return <PageLoading />
   }
 
   return (

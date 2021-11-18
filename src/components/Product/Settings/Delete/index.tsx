@@ -22,7 +22,7 @@ import Sidebar from '../Sidebar'
 
 const DeleteSettings: React.FC = () => {
   const router = useRouter()
-  const { currentUser, currentUserLoading } = useContext(AppContext)
+  const { currentUser } = useContext(AppContext)
   const [deleting, setDeleting] = useState<boolean>(false)
   const { data, loading } = useQuery<GetProductSettingsQuery>(
     GET_PRODUCT_SETTINGS_QUERY,
@@ -62,13 +62,11 @@ const DeleteSettings: React.FC = () => {
     }
   }
 
-  if (currentUserLoading || loading) {
-    return <PageLoading message="Loading settings" />
-  }
+  if (loading) return <PageLoading />
 
   if (!currentUser) {
     if (process.browser) router.push('/login')
-    return <PageLoading message="Redirecting to Login" />
+    return <PageLoading />
   }
 
   if (product?.owner?.id !== currentUser?.id) return <Custom404 />

@@ -45,7 +45,7 @@ export const GET_ONBOARDING_USERS_QUERY = gql`
 
 const Follow: React.FC = () => {
   const router = useRouter()
-  const { currentUser, currentUserLoading } = useContext(AppContext)
+  const { currentUser } = useContext(AppContext)
   const [showSkip, setShowSkip] = useState<boolean>(true)
   const { data, loading, error } = useQuery<GetOnboardingUsersQuery>(
     GET_ONBOARDING_USERS_QUERY,
@@ -57,11 +57,9 @@ const Follow: React.FC = () => {
     router.push('/onboarding/finish')
   }
 
-  if (currentUserLoading) return <PageLoading message="Loading" />
-
   if (!currentUser) {
     if (process.browser) router.push('/login')
-    return <PageLoading message="Redirecting to Login" />
+    return <PageLoading />
   }
 
   return (

@@ -40,9 +40,7 @@ const SocialSettings: React.FC = () => {
   )
   const product = data?.product
 
-  if (loading) {
-    return <PageLoading message="Loading settings" />
-  }
+  if (loading) return <PageLoading />
 
   if (product?.owner?.id !== currentUser?.id) return <Custom404 />
 

@@ -26,9 +26,7 @@ export const GET_TIPS_QUERY = gql`
 const TipsSettings: React.FC = () => {
   const { data, loading } = useQuery<GetTipsQuery>(GET_TIPS_QUERY)
 
-  if (loading) {
-    return <PageLoading message="Loading settings" />
-  }
+  if (loading) return <PageLoading />
 
   return <TipsSettingsForm currentUser={data?.me as User} />
 }

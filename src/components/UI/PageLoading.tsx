@@ -1,18 +1,13 @@
 import React from 'react'
 
-import { Spinner } from './Spinner'
-
-interface Props {
-  message: string
-}
-
-export const PageLoading: React.FC<Props> = ({ message }) => {
+export const PageLoading: React.FC = () => {
   return (
     <div className="flex flex-grow items-center justify-center">
-      <div className="space-y-3">
-        <Spinner className="mx-auto" />
-        <div>{message}</div>
-      </div>
+      <img
+        className="block h-15 sm:h-10 w-auto"
+        src="/logo.svg"
+        alt="Devparty"
+      />
     </div>
   )
 }

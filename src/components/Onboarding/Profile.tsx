@@ -21,11 +21,11 @@ const Profile: React.FC = () => {
   )
   const currentUser = data?.me
 
-  if (loading) return <PageLoading message="Loading" />
+  if (loading) return <PageLoading />
 
   if (!currentUser) {
     if (process.browser) router.push('/login')
-    return <PageLoading message="Redirecting to Login" />
+    return <PageLoading />
   }
 
   return (

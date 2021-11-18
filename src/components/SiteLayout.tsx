@@ -1,4 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
+import { PageLoading } from '@components/UI/PageLoading'
 import { CurrentUserQuery, User } from '@graphql/types.generated'
 import Head from 'next/head'
 import { useTheme } from 'next-themes'
@@ -71,6 +72,10 @@ const SiteLayout: React.FC<Props> = ({ children }) => {
     currentUserError: error,
     staffMode,
     setStaffMode
+  }
+
+  if (loading) {
+    return <PageLoading />
   }
 
   return (

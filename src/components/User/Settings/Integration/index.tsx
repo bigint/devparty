@@ -19,9 +19,7 @@ export const GET_INTEGRATION_QUERY = gql`
 const IntegrationSettings: React.FC = () => {
   const { data, loading } = useQuery<GetIntegrationQuery>(GET_INTEGRATION_QUERY)
 
-  if (loading) {
-    return <PageLoading message="Loading settings" />
-  }
+  if (loading) return <PageLoading />
 
   return (
     <IntegrationSettingsForm integration={data?.integration as Integration} />

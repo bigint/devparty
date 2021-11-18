@@ -34,7 +34,7 @@ const newCommunitySchema = object({
 
 const NewCommunity: React.FC = () => {
   const router = useRouter()
-  const { currentUser, currentUserLoading } = useContext(AppContext)
+  const { currentUser } = useContext(AppContext)
   const [createCommunity, createCommunityResult] = useMutation<
     CreateCommunityMutation,
     CreateCommunityMutationVariables
@@ -59,11 +59,9 @@ const NewCommunity: React.FC = () => {
     schema: newCommunitySchema
   })
 
-  if (currentUserLoading) return <PageLoading message="Loading" />
-
   if (!currentUser) {
     if (process.browser) router.push('/login')
-    return <PageLoading message="Redirecting to Login" />
+    return <PageLoading />
   }
 
   return (

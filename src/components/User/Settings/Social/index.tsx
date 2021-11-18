@@ -23,9 +23,7 @@ export const GET_SOCIAL_QUERY = gql`
 const SocialSettings: React.FC = () => {
   const { data, loading } = useQuery<GetSocialQuery>(GET_SOCIAL_QUERY)
 
-  if (loading) {
-    return <PageLoading message="Loading settings" />
-  }
+  if (loading) return <PageLoading />
 
   return <SocialSettingsForm currentUser={data?.me as User} />
 }

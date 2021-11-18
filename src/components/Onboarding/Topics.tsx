@@ -34,7 +34,7 @@ export const GET_ONBOARDING_TOPICS_QUERY = gql`
 
 const Topics: React.FC = () => {
   const router = useRouter()
-  const { currentUser, currentUserLoading } = useContext(AppContext)
+  const { currentUser } = useContext(AppContext)
   const [showSkip, setShowSkip] = useState<boolean>(true)
   const { data, loading, error } = useQuery<GetOnboardingTopicsQuery>(
     GET_ONBOARDING_TOPICS_QUERY,
@@ -46,11 +46,9 @@ const Topics: React.FC = () => {
     router.push('/onboarding/profile')
   }
 
-  if (currentUserLoading) return <PageLoading message="Loading" />
-
   if (!currentUser) {
     if (process.browser) router.push('/login')
-    return <PageLoading message="Redirecting to Login" />
+    return <PageLoading />
   }
 
   return (

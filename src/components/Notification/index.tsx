@@ -70,7 +70,7 @@ export const GET_NOTIFICATIONS_QUERY = gql`
 
 const Notifications: React.FC = () => {
   const router = useRouter()
-  const { currentUser, currentUserLoading } = useContext(AppContext)
+  const { currentUser } = useContext(AppContext)
   const [isRead, setIsRead] = useState<boolean>(false)
   const { data, loading, error, fetchMore } = useQuery<GetNotificationsQuery>(
     GET_NOTIFICATIONS_QUERY,
@@ -96,12 +96,11 @@ const Notifications: React.FC = () => {
     }
   })
 
-  if (currentUserLoading || loading)
-    return <PageLoading message="Loading notifications" />
+  if (loading) return <PageLoading />
 
   if (!currentUser) {
     if (process.browser) router.push('/login')
-    return <PageLoading message="Redirecting to Login" />
+    return <PageLoading />
   }
 
   return (
