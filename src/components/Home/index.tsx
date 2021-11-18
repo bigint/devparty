@@ -14,8 +14,8 @@ import WhoToFollow from './WhoToFollow'
 const Footer = dynamic(() => import('@components/shared/Footer'))
 
 const Home: React.FC = () => {
-  const { currentUser } = useContext(AppContext)
   const router = useRouter()
+  const { currentUser } = useContext(AppContext)
   const [feedType, setFeedType] = useState<string>('ALL')
 
   if (!currentUser) {

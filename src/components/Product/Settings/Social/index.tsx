@@ -40,6 +40,11 @@ const SocialSettings: React.FC = () => {
   )
   const product = data?.product
 
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <PageLoading />
+  }
+
   if (loading) return <PageLoading />
 
   if (product?.owner?.id !== currentUser?.id) return <Custom404 />
