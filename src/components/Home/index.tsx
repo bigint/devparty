@@ -1,6 +1,7 @@
 import { GridItemEight, GridItemFour, GridLayout } from '@components/GridLayout'
 import FeedType from '@components/Home/FeedType'
 import NewPost from '@components/Post/NewPost'
+import { PageLoading } from '@components/UI/PageLoading'
 import AppContext from '@components/utils/AppContext'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -18,12 +19,12 @@ const Home: React.FC = () => {
   const [feedType, setFeedType] = useState<string>('ALL')
 
   if (currentUserLoading) {
-    return <p>Loading</p>
+    return <PageLoading message="Loading home" />
   }
 
   if (!currentUser) {
     if (process.browser) router.push('/login')
-    return <p>Redirecting to Login</p>
+    return <PageLoading message="Redirecting to Login" />
   }
 
   return (
