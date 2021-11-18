@@ -3,6 +3,7 @@ import FeedType from '@components/Home/FeedType'
 import NewPost from '@components/Post/NewPost'
 import AppContext from '@components/utils/AppContext'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 import React, { useContext, useState } from 'react'
 
 import HomeFeed from './Feed'
@@ -12,8 +13,18 @@ import WhoToFollow from './WhoToFollow'
 const Footer = dynamic(() => import('@components/shared/Footer'))
 
 const Home: React.FC = () => {
-  const { currentUser } = useContext(AppContext)
+  const { currentUser, currentUserLoading } = useContext(AppContext)
+  const router = useRouter()
   const [feedType, setFeedType] = useState<string>('ALL')
+
+  if (currentUserLoading) {
+    return <p>Loading</p>
+  }
+
+  if (!currentUser) {
+    if (process.browser) router.push('/login')
+    return <p>Redirecting to Login</p>
+  }
 
   return (
     <GridLayout>
