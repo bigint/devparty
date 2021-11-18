@@ -46,7 +46,7 @@ const DeleteSettings: React.FC = () => {
         toast.error(ERROR_MESSAGE)
       },
       onCompleted() {
-        window.location.href = '/'
+        if (process.browser) router.push('/login')
       }
     }
   )
