@@ -27,6 +27,11 @@ const Home: React.FC = () => {
     return <PageLoading message="Redirecting to Login" />
   }
 
+  if (!currentUser.isOnboarded) {
+    if (process.browser) router.push('/onboarding')
+    return <PageLoading message="Redirecting to Onboard" />
+  }
+
   return (
     <GridLayout>
       <GridItemEight>

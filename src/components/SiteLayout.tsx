@@ -15,6 +15,7 @@ export const CURRENT_USER_QUERY = gql`
       id
       username
       isStaff
+      isOnboarded
       spammy
       masquerading
       profile {
