@@ -86,7 +86,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
     try {
       setIsMinting(true)
       // Connect to Wallet
-      const web3Modal = getWeb3Modal(resolvedTheme || 'light')
+      const web3Modal = await getWeb3Modal(resolvedTheme || 'light')
       const web3 = new ethers.providers.Web3Provider(await web3Modal.connect())
 
       // Get signature from the user
