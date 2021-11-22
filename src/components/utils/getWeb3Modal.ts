@@ -3,11 +3,16 @@ import { INFURA_ID } from 'src/constants'
 import Web3Modal from 'web3modal'
 
 const getWeb3Modal = async (theme: string) => {
-  let Torus = (await import('@toruslabs/torus-embed')).default
+  const Torus = (await import('@toruslabs/torus-embed')).default
+  const Fortmatic = (await import('fortmatic')).default
   const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider,
       options: { infuraId: INFURA_ID }
+    },
+    fortmatic: {
+      package: Fortmatic,
+      options: { key: 'pk_live_66C75459C14ADB4A' }
     },
     torus: { package: Torus }
   }

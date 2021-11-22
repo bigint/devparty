@@ -159,8 +159,7 @@ const Mint: React.FC<Props> = ({ post, setShowMintForm, setIsMinting }) => {
 
       setMintingStatus('COMPLETED')
       toast.success('Minting has been successfully completed!')
-    } catch (error: any) {
-      console.log(error.message)
+    } catch {
       setMintingStatus('NOTSTARTED')
       setError('Transaction has been cancelled!')
     }
