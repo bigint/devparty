@@ -104,7 +104,7 @@
     "faker": "^5.5.3",
     "hardhat": "^2.8.4",
     "hplipsum": "^1.0.0",
-    "husky": "^7.0.4",
+    "husky": "^8.0.3",
     "lint-staged": "^12.3.3",
     "postcss": "^8.4.5",
     "prettier": "^2.5.1",
